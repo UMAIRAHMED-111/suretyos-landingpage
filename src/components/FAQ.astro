@@ -50,21 +50,26 @@ const faqs = [
       Common questions
     </h2>
 
-    <dl class="faq-list">
+    <div class="faq-list" role="list">
       {faqs.map((faq, i) => (
-        <details class="faq-item" data-reveal data-delay={String((i % 4) + 1)}>
-          <summary class="faq-question">
+        <div class="faq-item" role="listitem" data-reveal data-delay={String((i % 4) + 1)}>
+          <button
+            class="faq-question"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${i}`}
+            type="button"
+          >
             <span>{faq.q}</span>
             <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-          </summary>
-          <dd class="faq-answer">
+          </button>
+          <div class="faq-answer" id={`faq-answer-${i}`} role="region">
             <p>{faq.a}</p>
-          </dd>
-        </details>
+          </div>
+        </div>
       ))}
-    </dl>
+    </div>
 
   </div>
 </section>
@@ -94,20 +99,19 @@ const faqs = [
     align-items: center;
     justify-content: space-between;
     gap: var(--sp-4);
+    width: 100%;
     padding: var(--sp-5) 0;
+    background: none;
+    border: none;
     cursor: pointer;
+    font-family: var(--font-display);
     font-size: var(--text-base);
     font-weight: 600;
     color: var(--navy);
-    list-style: none;
+    text-align: left;
     line-height: 1.45;
-    user-select: none;
-    -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
   }
-
-  .faq-question::-webkit-details-marker { display: none; }
-  .faq-question::marker { display: none; }
 
   .faq-question:focus-visible {
     outline: 2px solid var(--teal);
@@ -121,12 +125,11 @@ const faqs = [
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  details[open] .faq-chevron {
+  .faq-question[aria-expanded="true"] .faq-chevron {
     transform: rotate(180deg);
   }
 
   .faq-answer {
-    margin: 0;
     overflow: hidden;
     height: 0;
     transition: height 0.32s cubic-bezier(0.16, 1, 0.3, 1);
@@ -145,33 +148,39 @@ const faqs = [
     .faq-question { font-size: var(--text-lg); }
     .faq-answer p  { font-size: var(--text-lg); }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-answer    { transition: none; }
+    .faq-chevron   { transition: none; }
+  }
 </style>
 
 <script>
-  document.querySelectorAll<HTMLDetailsElement>('.faq-item').forEach((details) => {
-    const summary = details.querySelector<HTMLElement>('.faq-question')!;
-    const answer  = details.querySelector<HTMLElement>('.faq-answer')!;
+  document.querySelectorAll<HTMLElement>('.faq-item').forEach((item) => {
+    const btn    = item.querySelector<HTMLButtonElement>('.faq-question')!;
+    const answer = item.querySelector<HTMLElement>('.faq-answer')!;
     let busy = false;
 
-    summary.addEventListener('click', (e) => {
-      e.preventDefault();
+    btn.addEventListener('click', () => {
       if (busy) return;
       busy = true;
 
-      if (details.open) {
-        // Collapse: snapshot current height, then animate to 0
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+      if (isOpen) {
+        // Collapse
+        btn.setAttribute('aria-expanded', 'false');
         answer.style.height = answer.scrollHeight + 'px';
         requestAnimationFrame(() => {
           answer.style.height = '0';
         });
         setTimeout(() => {
-          details.open = false;
           answer.style.height = '';
           busy = false;
         }, 340);
       } else {
-        // Expand: open first so scrollHeight is measurable, then animate
-        details.open = true;
+        // Expand
+        btn.setAttribute('aria-expanded', 'true');
         const h = answer.scrollHeight;
         answer.style.height = '0';
         requestAnimationFrame(() => {
