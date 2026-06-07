@@ -2,14 +2,42 @@
 const faqs = [
   {
     q: 'Is this another generic insurance platform?',
-    a: 'No. SuretyOS is built specifically for surety bond workflows: intake, document generation, and renewals for commercial, court, and construction bonds. It is not adapted from P&C software.',
+    a: 'No. SuretyOS is built specifically for surety bond workflows: intake, document generation, and renewals for commercial, court, and construction bonds. It is not adapted from P&C or general insurance software.',
+  },
+  {
+    q: 'How does document generation work?',
+    a: 'You upload your existing Word or PDF templates once, tagging the fields you want auto-filled. When a client submits an intake form, SuretyOS maps their data to every tagged field across all four documents and generates them instantly. No copy-paste, no reformatting.',
+  },
+  {
+    q: 'What bond types does it support?',
+    a: 'Court and fiduciary bonds (guardianship, administrator, executor), commercial and license bonds, construction and contract bonds, and fidelity bonds. If you write a bond type not listed, contact us — we scope new bond types during the founding program.',
+  },
+  {
+    q: 'Do I need to leave my carrier portals?',
+    a: 'No. SuretyOS sits alongside your existing carrier relationships. It handles the document prep and client intake on your end. You still submit to carriers the way you do today.',
+  },
+  {
+    q: 'How long does setup take?',
+    a: 'Most agencies are fully set up within a week. We handle onboarding personally for founding members: template tagging, data migration from your spreadsheets, and a walkthrough with your team.',
+  },
+  {
+    q: 'What happens if my templates change?',
+    a: 'Update the template in SuretyOS once. Every bond generated after that uses the new version. Old bonds are unaffected.',
+  },
+  {
+    q: 'Can multiple staff members use it?',
+    a: 'Yes. SuretyOS is built for agency teams. All plans include multiple seats. Permissions and access levels are on the roadmap for the first public release.',
+  },
+  {
+    q: 'Is there a free trial?',
+    a: 'We are not doing a self-serve trial during the founding phase. Instead, founding members get a live walkthrough and a hands-on setup session with us. That gives you a real picture of the workflow, not a demo environment.',
   },
   {
     q: 'Is my data secure?',
-    a: 'SOC 2-aligned architecture from day one. Encryption in transit and at rest. Your data is yours, exportable at any time in standard formats. No vendor lock-in.',
+    a: 'SOC 2-aligned architecture from day one. Encryption in transit and at rest. Your data is yours — exportable at any time in standard formats. No vendor lock-in.',
   },
   {
-    q: 'When does it launch?',
+    q: 'When does it launch publicly?',
     a: 'We are onboarding founding agencies in waves as we build. Join now to secure your spot and lifetime pricing. We will be in touch within 48 hours to schedule a call.',
   },
 ];
@@ -24,7 +52,7 @@ const faqs = [
 
     <dl class="faq-list">
       {faqs.map((faq, i) => (
-        <details class="faq-item" data-reveal data-delay={String((i % 5) + 1)}>
+        <details class="faq-item" data-reveal data-delay={String((i % 4) + 1)}>
           <summary class="faq-question">
             <span>{faq.q}</span>
             <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -75,9 +103,9 @@ const faqs = [
     line-height: 1.45;
     user-select: none;
     -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* Remove default triangle in webkit */
   .faq-question::-webkit-details-marker { display: none; }
   .faq-question::marker { display: none; }
 
@@ -90,7 +118,7 @@ const faqs = [
   .faq-chevron {
     flex-shrink: 0;
     color: var(--teal);
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   details[open] .faq-chevron {
@@ -101,7 +129,7 @@ const faqs = [
     margin: 0;
     overflow: hidden;
     height: 0;
-    transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: height 0.32s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .faq-answer p {
@@ -121,14 +149,17 @@ const faqs = [
 
 <script>
   document.querySelectorAll<HTMLDetailsElement>('.faq-item').forEach((details) => {
-    const summary = details.querySelector('.faq-question')!;
+    const summary = details.querySelector<HTMLElement>('.faq-question')!;
     const answer  = details.querySelector<HTMLElement>('.faq-answer')!;
+    let busy = false;
 
     summary.addEventListener('click', (e) => {
       e.preventDefault();
+      if (busy) return;
+      busy = true;
 
       if (details.open) {
-        // Collapse
+        // Collapse: snapshot current height, then animate to 0
         answer.style.height = answer.scrollHeight + 'px';
         requestAnimationFrame(() => {
           answer.style.height = '0';
@@ -136,9 +167,10 @@ const faqs = [
         setTimeout(() => {
           details.open = false;
           answer.style.height = '';
-        }, 360);
+          busy = false;
+        }, 340);
       } else {
-        // Expand
+        // Expand: open first so scrollHeight is measurable, then animate
         details.open = true;
         const h = answer.scrollHeight;
         answer.style.height = '0';
@@ -149,6 +181,7 @@ const faqs = [
         });
         answer.addEventListener('transitionend', () => {
           answer.style.height = '';
+          busy = false;
         }, { once: true });
       }
     });
