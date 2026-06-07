@@ -10,6 +10,9 @@ const benefits = [
 ---
 
 <section id="signup" class="section section--navy founding-section" aria-labelledby="founding-heading">
+  <div class="founding-orb founding-orb--a" aria-hidden="true"></div>
+  <div class="founding-orb founding-orb--b" aria-hidden="true"></div>
+  <div class="founding-orb founding-orb--c" aria-hidden="true"></div>
   <div class="container founding-grid">
 
     <!-- Left: offer copy -->
@@ -50,7 +53,69 @@ const benefits = [
 </section>
 
 <style>
+  .founding-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .founding-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  .founding-orb--a {
+    width: 600px;
+    height: 450px;
+    background: radial-gradient(ellipse at center, rgba(14, 124, 134, 0.14), transparent 70%);
+    top: -20%;
+    right: -5%;
+    animation: forb-drift-a 16s ease-in-out infinite;
+  }
+
+  .founding-orb--b {
+    width: 380px;
+    height: 300px;
+    background: radial-gradient(ellipse at center, rgba(13, 159, 126, 0.1), transparent 70%);
+    bottom: -10%;
+    left: -4%;
+    animation: forb-drift-b 21s ease-in-out infinite;
+  }
+
+  .founding-orb--c {
+    width: 260px;
+    height: 200px;
+    background: radial-gradient(ellipse at center, rgba(14, 124, 134, 0.08), transparent 70%);
+    top: 40%;
+    left: 35%;
+    animation: forb-drift-c 12s ease-in-out infinite;
+  }
+
+  @keyframes forb-drift-a {
+    0%, 100% { transform: translate(0, 0); }
+    35%       { transform: translate(-8%, 10%); }
+    70%       { transform: translate(5%, -6%); }
+  }
+
+  @keyframes forb-drift-b {
+    0%, 100% { transform: translate(0, 0); }
+    40%       { transform: translate(12%, -8%); }
+    75%       { transform: translate(-5%, 5%); }
+  }
+
+  @keyframes forb-drift-c {
+    0%, 100% { transform: translate(0, 0); }
+    50%       { transform: translate(-10%, 12%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .founding-orb { animation: none; }
+  }
+
   .founding-grid {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--sp-12);
