@@ -1,101 +1,179 @@
 ---
-const pillars = [
-  {
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7l-9-5z"/></svg>`,
-    label: 'Surety-specific',
-    desc: 'Built for court, commercial, and construction bonds. Not general insurance software adapted for surety.',
-  },
-  {
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="22" height="14" rx="2"/><path d="M6 7V5a6 6 0 0112 0v2"/></svg>`,
-    label: 'SOC 2-aligned',
-    desc: 'Encrypted in transit and at rest. Your data is exportable at any time in standard formats.',
-  },
-  {
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>`,
-    label: 'Founder-built',
-    desc: 'Built by people who have worked Florida court bond workflows by hand. Not a guess at what agencies need.',
-  },
-];
+const linkedin = 'https://www.linkedin.com/in/umair-ahmed-3675261b0/';
 ---
 
-<section class="section section--white trust-section" aria-labelledby="trust-heading">
-  <div class="container">
+<section class="section section--filing note-section" aria-labelledby="note-heading">
+  <div class="container note-inner">
 
-    <p id="trust-heading" class="trust-label" data-reveal>Why agencies choose SuretyOS</p>
+    <h1 id="note-heading" class="u-headline note-heading" data-reveal>
+      Why we're building SuretyOS.
+    </h1>
 
-    <div class="trust-grid">
-      {pillars.map((p, i) => (
-        <div class="trust-col" data-reveal data-delay={String(i + 1)}>
-          <span class="trust-icon" aria-hidden="true" set:html={p.icon} />
-          <h3 class="trust-col-label">{p.label}</h3>
-          <p class="trust-col-desc">{p.desc}</p>
-        </div>
-      ))}
+    <div class="note-body" data-reveal data-delay="1">
+      <p>
+        We spent months sitting with surety producers and agency owners, watching
+        the same afternoon repeat itself. A bond request comes in. The same client
+        name, the same amount, the same case number gets typed by hand into a bond
+        form, a power of attorney, an indemnity agreement, and a court cover sheet.
+        One set of facts, four documents, forty-five minutes gone. Then it goes onto
+        a renewals tab in a spreadsheet that nobody fully trusts.
+      </p>
+      <p>
+        Every agency had built its own workaround, and every workaround was held
+        together by someone's memory. None of them should have had to. The software
+        they'd been sold was built for general insurance and bent to fit surety,
+        never built for it.
+      </p>
+      <p>
+        SuretyOS is the system we wanted to hand them. One intake, every document
+        generated pre-filled, every renewal tracked for the life of the bond.
+        Built for court, commercial, and construction bonds specifically, with the
+        people who write them every day.
+      </p>
+      <p class="note-emphasis">
+        We're taking on the first 25 founding agencies ourselves. If you write real bond
+        volume and you're tired of the retyping, we want to hear exactly how you work.
+        You'll have our direct line, and your feedback decides what we build first.
+      </p>
+    </div>
+
+    <div class="signature" data-reveal data-delay="2">
+      <span class="sig-mark" aria-hidden="true">UA</span>
+      <div class="sig-meta">
+        <span class="sig-name">Umair Ahmed</span>
+        <span class="sig-role">Co-Founder, SuretyOS</span>
+      </div>
+      <a
+        class="sig-linkedin"
+        href={linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Umair Ahmed on LinkedIn"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/>
+        </svg>
+        Connect on LinkedIn
+      </a>
     </div>
 
   </div>
 </section>
 
 <style>
-  .trust-label {
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--ink-tertiary);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: var(--sp-10);
+  .note-inner {
+    max-width: 720px;
   }
 
-  .trust-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    border-top: 1px solid rgba(14, 39, 68, 0.1);
+  .note-heading {
+    color: var(--navy);
+    margin-bottom: var(--sp-8);
   }
 
-  @media (min-width: 700px) {
-    .trust-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .trust-col {
-    padding: var(--sp-8) 0;
+  .note-body {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-3);
-    border-bottom: 1px solid rgba(14, 39, 68, 0.1);
+    gap: var(--sp-5);
   }
 
-  @media (min-width: 700px) {
-    .trust-col {
-      padding: var(--sp-8) var(--sp-8) var(--sp-8) 0;
-      border-bottom: none;
-    }
-
-    .trust-col + .trust-col {
-      padding-left: var(--sp-8);
-      border-left: 1px solid rgba(14, 39, 68, 0.1);
-    }
+  .note-body p {
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    color: var(--ink-secondary);
+    max-width: 64ch;
+    text-wrap: pretty;
   }
 
-  .trust-icon {
+  /* The ask — the one line that should land hardest. */
+  .note-emphasis {
+    color: var(--ink) !important;
+    font-weight: 500;
+  }
+
+  /* ── Signature: reads like the close of a letter ── */
+  .signature {
     display: flex;
-    color: var(--teal);
-    flex-shrink: 0;
+    align-items: center;
+    gap: var(--sp-4);
+    margin-top: var(--sp-10);
+    padding-top: var(--sp-6);
+    border-top: 1px solid rgba(14, 39, 68, 0.12);
   }
 
-  .trust-col-label {
-    font-size: var(--text-base);
+  .sig-mark {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--navy);
+    color: white;
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .sig-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.25;
+  }
+
+  .sig-name {
+    font-family: var(--font-display);
+    font-size: var(--text-title);
     font-weight: 700;
     color: var(--navy);
     letter-spacing: -0.01em;
   }
 
-  .trust-col-desc {
+  .sig-role {
     font-size: var(--text-base);
-    line-height: 1.65;
     color: var(--ink-secondary);
-    text-wrap: pretty;
+  }
+
+  .sig-linkedin {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: 0.5rem 0.875rem;
+    border: 1px solid rgba(14, 39, 68, 0.18);
+    border-radius: var(--radius-md);
+    background: white;
+    color: var(--teal);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+  }
+
+  .sig-linkedin:hover {
+    border-color: var(--teal);
+    color: var(--teal-hover);
+    box-shadow: var(--shadow-card);
+    transform: translateY(-1px);
+  }
+
+  .sig-linkedin:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 560px) {
+    .signature {
+      flex-wrap: wrap;
+      gap: var(--sp-3);
+    }
+    .sig-linkedin {
+      margin-left: 0;
+      width: 100%;
+      justify-content: center;
+      padding: 0.6875rem 0.875rem;
+    }
   }
 </style>

@@ -184,7 +184,15 @@
   }
 
   /* ── Illustration ── */
+  /* Mobile: the before/after contrast is carried by the WowMoment section,
+     so the hero shows only the payoff — the generated-documents window. */
   .hero-visual {
+    display: block;
+    margin-top: var(--sp-10);
+  }
+
+  .hero-visual .before-panel,
+  .hero-visual .transform-arrow {
     display: none;
   }
 
@@ -193,6 +201,20 @@
       display: flex;
       align-items: center;
       gap: var(--sp-4);
+      margin-top: 0;
+    }
+
+    .hero-visual .before-panel {
+      display: block;
+    }
+
+    .hero-visual .transform-arrow {
+      display: flex;
+    }
+
+    .after-panel {
+      max-width: none;
+      margin: 0;
     }
   }
 
@@ -294,6 +316,8 @@
   .after-panel {
     flex: 1.35;
     min-width: 0;
+    max-width: 440px;
+    margin: 0 auto;
     background: white;
     border-radius: 14px;
     overflow: hidden;
@@ -458,7 +482,8 @@
     o:  Math.random() * 0.18 + 0.07,
   }));
 
-  let raf: number;
+  let raf = 0;
+  let running = false;
 
   function frame() {
     ctx.clearRect(0, 0, W, H);
@@ -496,6 +521,27 @@
     raf = requestAnimationFrame(frame);
   }
 
-  frame();
+  function start() {
+    if (running) return;
+    running = true;
+    frame();
+  }
+  function stop() {
+    running = false;
+    cancelAnimationFrame(raf);
+  }
+
+  // Only animate while the hero is on-screen and the tab is visible —
+  // the O(n²) connection loop has no business running once it's scrolled away.
+  const onScreen = new IntersectionObserver(
+    ([entry]) => (entry.isIntersecting ? start() : stop()),
+    { threshold: 0 }
+  );
+  onScreen.observe(canvas);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+    else if (canvas.getBoundingClientRect().bottom > 0) start();
+  });
 })();
 </script>

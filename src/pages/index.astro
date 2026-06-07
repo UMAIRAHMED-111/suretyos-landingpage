@@ -1,15 +1,14 @@
 ---
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
-import Problem from '../components/Problem.astro';
-import Solution from '../components/Solution.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import WowMoment from '../components/WowMoment.astro';
 import ROI from '../components/ROI.astro';
 import FoundingOffer from '../components/FoundingOffer.astro';
-import FounderNote from '../components/FounderNote.astro';
 import FAQ from '../components/FAQ.astro';
 import FinalCTA from '../components/FinalCTA.astro';
+import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 ---
@@ -55,16 +54,16 @@ import '../styles/global.css';
 
   <main id="main">
     <Hero />
-    <Problem />
-    <Solution />
+    <BeforeAfter />
     <HowItWorks />
     <WowMoment />
     <ROI />
     <FoundingOffer />
-    <FounderNote />
     <FAQ />
     <FinalCTA />
   </main>
+
+  <Footer />
 </body>
 </html>
 
@@ -109,7 +108,7 @@ import '../styles/global.css';
     'color:#0e7c86;font-size:12px;font-weight:500;'
   );
   console.log(
-    '%c Built with Astro + Supabase. Say hello: hello@suretyos.com',
+    '%c Built with Astro + Supabase. Say hello: info@citisoftsolutions.com',
     'color:#6b7280;font-size:11px;'
   );
 </script>

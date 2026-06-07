@@ -131,7 +131,7 @@ export default function SignupForm() {
         </div>
         <h3 className="success-title">You're in.</h3>
         <p className="success-body">
-          Check your email — we'll be in touch within 48 hours to set up a quick call. You've locked in lifetime founder pricing.
+          Check your email. We'll be in touch within 48 hours to set up a quick call. You've locked in lifetime founder pricing.
         </p>
       </div>
     );

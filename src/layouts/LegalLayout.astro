@@ -1,0 +1,129 @@
+---
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  updated: string;
+}
+const { title, updated } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} — SuretyOS</title>
+  <meta name="robots" content="noindex, follow" />
+  <meta name="theme-color" content="#0e2744" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <header class="legal-nav">
+    <div class="container legal-nav-inner">
+      <a href="/" class="legal-logo" aria-label="SuretyOS home">
+        <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+          <circle cx="13" cy="13" r="12" fill="#0e7c86"/>
+          <circle cx="13" cy="13" r="10.5" stroke="rgba(255,255,255,0.12)" stroke-width="0.75" fill="none"/>
+          <path d="M16 9C16 6 10 6 10 9C10 12 16 14 16 17C16 20 10 20 10 17"
+                stroke="white" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        SuretyOS
+      </a>
+      <a href="/" class="legal-back">&larr; Back to home</a>
+    </div>
+  </header>
+
+  <main class="legal-main">
+    <div class="container legal-inner">
+      <h1 class="u-headline legal-title">{title}</h1>
+      <p class="legal-updated">Last updated {updated}</p>
+      <div class="legal-prose">
+        <slot />
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+
+  <style>
+    .legal-nav {
+      background: var(--navy);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .legal-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .legal-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      color: white;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 1.0625rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+    .legal-back {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .legal-back:hover { color: white; }
+    .legal-logo:focus-visible,
+    .legal-back:focus-visible {
+      outline: 2px solid var(--mint);
+      outline-offset: 4px;
+      border-radius: var(--radius-sm);
+    }
+
+    .legal-main {
+      padding: var(--sp-20) 0 var(--sp-24);
+      background: var(--white);
+    }
+    .legal-inner { max-width: 720px; }
+
+    .legal-title { color: var(--navy); margin-bottom: var(--sp-2); }
+    .legal-updated {
+      font-size: var(--text-sm);
+      color: var(--ink-tertiary);
+      margin-bottom: var(--sp-10);
+    }
+
+    .legal-prose :global(h2) {
+      font-family: var(--font-display);
+      font-size: var(--text-title);
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      margin: var(--sp-10) 0 var(--sp-3);
+    }
+    .legal-prose :global(p) {
+      font-size: var(--text-base);
+      line-height: 1.7;
+      color: var(--ink-secondary);
+      max-width: 66ch;
+      margin-bottom: var(--sp-4);
+      text-wrap: pretty;
+    }
+    .legal-prose :global(a) {
+      color: var(--teal);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+  </style>
+</body>
+</html>

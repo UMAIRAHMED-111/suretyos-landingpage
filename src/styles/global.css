@@ -9,7 +9,7 @@
   --white:         #ffffff;
   --ink:           #1f1f2e;
   --ink-secondary: #475569;   /* high contrast on white: ~7:1 */
-  --ink-tertiary:  #6b7280;   /* captions only, large enough size */
+  --ink-tertiary:  #5e6a78;   /* captions & placeholders — AA on white and filing */
 
   /* Semantic backgrounds */
   --bg-dark:    var(--navy);

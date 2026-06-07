@@ -1,0 +1,174 @@
+---
+const rows = [
+  {
+    without: 'The same client data typed by hand into four documents: bond form, power of attorney, indemnity agreement, court cover sheet.',
+    with: 'One intake form populates all four documents, pre-filled and ready to execute.',
+  },
+  {
+    without: 'Clients chased over email for missing details, one carrier portal at a time.',
+    with: 'Send one smart form tailored to the bond type. Structured data lands in your dashboard.',
+  },
+  {
+    without: "Last year's bond buried in an email thread or a shared drive.",
+    with: 'Find any bond by client, carrier, county, or case number in seconds.',
+  },
+  {
+    without: 'Renewals tracked on a spreadsheet tab. Miss one and you lose a client or face an E&O claim.',
+    with: 'Automatic alerts at 90, 60, 30, and 15 days. Review and renew in one click.',
+  },
+];
+---
+
+<section class="section section--filing" aria-labelledby="compare-heading">
+  <div class="container">
+
+    <h2 id="compare-heading" class="u-headline compare-heading" data-reveal>
+      The work, before and after SuretyOS.
+    </h2>
+
+    <div class="compare-grid">
+
+      <!-- Without -->
+      <div class="compare-panel is-without" data-reveal data-delay="1">
+        <p class="compare-label compare-label--without">Without SuretyOS</p>
+        <ul class="compare-list" role="list">
+          {rows.map((r) => (
+            <li class="compare-item">
+              <span class="compare-mark mark-x" aria-hidden="true">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="compare-text">{r.without}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- With -->
+      <div class="compare-panel is-with" data-reveal data-delay="2">
+        <p class="compare-label compare-label--with">With SuretyOS</p>
+        <ul class="compare-list" role="list">
+          {rows.map((r) => (
+            <li class="compare-item">
+              <span class="compare-mark mark-check" aria-hidden="true">
+                <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
+                  <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="compare-text">{r.with}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .compare-heading {
+    color: var(--navy);
+    max-width: 22ch;
+    margin-bottom: var(--sp-12);
+  }
+
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+  }
+
+  @media (min-width: 820px) {
+    .compare-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-8);
+      align-items: stretch;
+    }
+  }
+
+  /* ── Panels ── */
+  .compare-panel {
+    border-radius: var(--radius-lg);
+    padding: var(--sp-8);
+  }
+
+  @media (min-width: 768px) {
+    .compare-panel { padding: var(--sp-10); }
+  }
+
+  /* The "before" state recedes: flat, muted, the paper you already have. */
+  .is-without {
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(26, 58, 92, 0.1);
+  }
+
+  /* The "after" state is the answer: white, lifted, teal-anchored. */
+  .is-with {
+    background: white;
+    border: 1px solid rgba(14, 124, 134, 0.28);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* ── Column labels ── */
+  .compare-label {
+    font-family: var(--font-display);
+    font-size: var(--text-title);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    padding-bottom: var(--sp-5);
+    margin-bottom: var(--sp-6);
+    border-bottom: 1px solid rgba(26, 58, 92, 0.1);
+  }
+
+  .compare-label--without { color: var(--ink-tertiary); }
+  .compare-label--with    { color: var(--navy); }
+
+  .is-with .compare-label { border-bottom-color: rgba(14, 124, 134, 0.2); }
+
+  /* ── Lists ── */
+  .compare-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+  }
+
+  .compare-item {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: var(--sp-3);
+    align-items: start;
+  }
+
+  .compare-mark {
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .mark-x {
+    background: rgba(26, 58, 92, 0.07);
+    color: var(--ink-tertiary);
+  }
+
+  .mark-check {
+    background: var(--teal);
+    color: white;
+  }
+
+  .compare-text {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .is-without .compare-text { color: var(--ink-tertiary); }
+  .is-with .compare-text    { color: var(--ink-secondary); }
+</style>

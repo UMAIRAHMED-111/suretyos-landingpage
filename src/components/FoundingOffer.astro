@@ -2,8 +2,8 @@
 import SignupForm from './SignupForm.tsx';
 
 const benefits = [
-  'Lifetime founder pricing — locked in, never increases',
-  'Direct line to the founders — your feedback builds the roadmap',
+  'Lifetime founder pricing: locked in, never increases',
+  'A direct line to the founders. Your feedback shapes the roadmap.',
   'First access before public launch',
   'Free white-glove setup and data migration',
 ];
@@ -42,6 +42,10 @@ const benefits = [
       <p class="spots-remaining">
         <span class="spots-count">25</span> founding spots remaining
       </p>
+
+      <a href="/founder" class="founder-link">
+        Read why we're building SuretyOS &rarr;
+      </a>
     </div>
 
     <!-- Right: form -->
@@ -185,6 +189,29 @@ const benefits = [
     font-weight: 700;
     color: var(--mint);
     font-size: var(--text-base);
+  }
+
+  .founder-link {
+    display: inline-block;
+    margin-top: var(--sp-5);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    padding-bottom: 2px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .founder-link:hover {
+    color: white;
+    border-bottom-color: var(--mint);
+  }
+
+  .founder-link:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
   }
 
   /* ── Form card ── */

@@ -2,8 +2,8 @@ import { Resend } from 'resend';
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
-const FROM = import.meta.env.FROM_EMAIL ?? 'noreply@suretyos.com';
-const NOTIFY = import.meta.env.NOTIFY_EMAIL ?? 'founder@suretyos.com';
+const FROM = import.meta.env.FROM_EMAIL ?? 'noreply@citisoftsolutions.com';
+const NOTIFY = import.meta.env.NOTIFY_EMAIL ?? 'info@citisoftsolutions.com';
 
 export async function sendConfirmationEmail(params: {
   name: string;
