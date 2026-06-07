@@ -189,7 +189,7 @@ const faqs = [
           });
         });
         answer.addEventListener('transitionend', () => {
-          answer.style.height = '';
+          answer.style.height = 'auto'; // 'auto' keeps it open; '' would reset to CSS height:0
           busy = false;
         }, { once: true });
       }
