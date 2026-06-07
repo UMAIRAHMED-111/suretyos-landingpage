@@ -1,0 +1,117 @@
+---
+const problems = [
+  {
+    svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>`,
+    title: 'Data retyping',
+    text: 'The same client data goes into four separate documents: bond form, power of attorney, indemnity agreement, court cover sheet. Typed by hand, every time.',
+  },
+  {
+    svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="9" height="8" rx="1.5"/><rect x="13" y="3" width="9" height="8" rx="1.5"/><rect x="2" y="13" width="9" height="8" rx="1.5"/><rect x="13" y="13" width="9" height="8" rx="1.5"/></svg>`,
+    title: 'Portal fragmentation',
+    text: 'Every carrier runs its own portal. Every county wants its own forms. The overhead compounds with each bond you write.',
+  },
+  {
+    svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none"/></svg>`,
+    title: 'Manual renewal tracking',
+    text: 'Renewals live in a spreadsheet. Miss one and you lose a client or face an E&O claim.',
+  },
+];
+---
+
+<section class="section section--white" aria-labelledby="problem-heading">
+  <div class="container">
+
+    <h2 id="problem-heading" class="u-headline problem-heading" data-reveal>
+      Three bottlenecks every surety agency knows.
+    </h2>
+
+    <ul class="problem-list" role="list">
+      {problems.map((p, i) => (
+        <li class="problem-item" data-reveal data-delay={String(i + 1)}>
+          <span class="problem-icon" aria-hidden="true" set:html={p.svg} />
+          <div class="problem-body">
+            <h3 class="problem-title">{p.title}</h3>
+            <p class="problem-text">{p.text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+  </div>
+</section>
+
+<style>
+  .problem-heading {
+    color: var(--navy);
+    max-width: 28ch;
+    margin-bottom: var(--sp-10);
+  }
+
+  .problem-list {
+    list-style: none;
+    border-top: 1px solid rgba(14, 39, 68, 0.1);
+  }
+
+  .problem-item {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: var(--sp-5);
+    align-items: start;
+    padding: var(--sp-6) 0;
+    border-bottom: 1px solid rgba(14, 39, 68, 0.1);
+    transition: opacity 0.2s ease;
+  }
+
+  @media (min-width: 640px) {
+    .problem-item {
+      grid-template-columns: 2.5rem 1fr;
+      gap: var(--sp-6);
+    }
+  }
+
+  .problem-list:has(.problem-item:hover) .problem-item {
+    opacity: 0.3;
+  }
+  .problem-list:has(.problem-item:hover) .problem-item:hover {
+    opacity: 1;
+  }
+
+  .problem-icon {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 3px;
+    color: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .problem-icon svg {
+    display: block;
+  }
+
+  .problem-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    min-width: 0;
+  }
+
+  .problem-title {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+
+  @media (min-width: 768px) {
+    .problem-title { font-size: var(--text-lg); }
+  }
+
+  .problem-text {
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: var(--ink-secondary);
+    max-width: 60ch;
+    text-wrap: pretty;
+  }
+</style>

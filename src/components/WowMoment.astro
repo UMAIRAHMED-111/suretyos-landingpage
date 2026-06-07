@@ -1,0 +1,372 @@
+---
+---
+
+<section class="section section--navy wow-section" aria-labelledby="wow-heading">
+  <div class="wow-orb wow-orb--a" aria-hidden="true"></div>
+  <div class="wow-orb wow-orb--b" aria-hidden="true"></div>
+  <div class="container wow-inner">
+
+    <div class="wow-copy" data-reveal>
+      <h2 id="wow-heading" class="u-headline wow-heading">
+        Watch a bond application become four finished documents in three seconds.
+      </h2>
+      <p class="wow-body">
+        SuretyOS handles the work you do by hand today: reading the application,
+        typing each field into each form. You review and approve the output.
+      </p>
+    </div>
+
+    <!-- Demo placeholder — animated to hint at the transformation -->
+    <div class="demo-card" aria-label="Product demo coming soon" data-reveal data-delay="2">
+      <div class="demo-header">
+        <div class="demo-dots" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <span class="demo-label">SuretyOS &mdash; Generate Documents</span>
+      </div>
+
+      <div class="demo-body">
+        <div class="demo-intake">
+          <p class="demo-section-label">Intake submission</p>
+          <div class="demo-field">
+            <span class="field-key">Principal</span>
+            <span class="field-val">John Smith</span>
+          </div>
+          <div class="demo-field">
+            <span class="field-key">Bond type</span>
+            <span class="field-val">Guardianship — FL Probate</span>
+          </div>
+          <div class="demo-field">
+            <span class="field-key">Bond amount</span>
+            <span class="field-val">$150,000</span>
+          </div>
+          <div class="demo-field">
+            <span class="field-key">County</span>
+            <span class="field-val">Miami-Dade</span>
+          </div>
+        </div>
+
+        <div class="demo-arrow" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10h12M10 4l6 6-6 6" stroke="#94a3b8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="demo-output">
+          <p class="demo-section-label">Generated</p>
+          <div class="demo-doc doc-animated" style="--delay: 0ms">
+            <span class="doc-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M2 2h7l3 3v7a1 1 0 01-1 1H2a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                <path d="M9 2v3h3" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Bond form
+          </div>
+          <div class="demo-doc doc-animated" style="--delay: 200ms">
+            <span class="doc-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M2 2h7l3 3v7a1 1 0 01-1 1H2a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                <path d="M9 2v3h3" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Power of attorney
+          </div>
+          <div class="demo-doc doc-animated" style="--delay: 400ms">
+            <span class="doc-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M2 2h7l3 3v7a1 1 0 01-1 1H2a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                <path d="M9 2v3h3" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Indemnity agreement
+          </div>
+          <div class="demo-doc doc-animated" style="--delay: 600ms">
+            <span class="doc-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M2 2h7l3 3v7a1 1 0 01-1 1H2a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                <path d="M9 2v3h3" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Court cover sheet
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-footer">
+        <span class="demo-timing">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <circle cx="6" cy="6" r="5" stroke="var(--mint)" stroke-width="1.2"/>
+            <path d="M6 3.5v2.8l1.8 1.2" stroke="var(--mint)" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          3.1 seconds
+        </span>
+        <span class="demo-count">4 documents ready</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .wow-section {
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Ambient drifting orbs */
+  .wow-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  .wow-orb--a {
+    width: 520px;
+    height: 380px;
+    background: radial-gradient(ellipse at center, rgba(14, 124, 134, 0.13), transparent 70%);
+    top: -10%;
+    left: -8%;
+    animation: orb-drift-a 14s ease-in-out infinite;
+  }
+
+  .wow-orb--b {
+    width: 400px;
+    height: 320px;
+    background: radial-gradient(ellipse at center, rgba(13, 159, 126, 0.09), transparent 70%);
+    bottom: -15%;
+    right: 5%;
+    animation: orb-drift-b 18s ease-in-out infinite;
+  }
+
+  @keyframes orb-drift-a {
+    0%, 100% { transform: translate(0, 0); }
+    33%       { transform: translate(12%, 8%); }
+    66%       { transform: translate(6%, -5%); }
+  }
+
+  @keyframes orb-drift-b {
+    0%, 100% { transform: translate(0, 0); }
+    40%       { transform: translate(-10%, -12%); }
+    70%       { transform: translate(5%, 6%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wow-orb { animation: none; }
+  }
+
+  .wow-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-12);
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (min-width: 900px) {
+    .wow-inner {
+      grid-template-columns: 40% 1fr;
+      gap: var(--sp-20);
+    }
+  }
+
+  .wow-heading {
+    color: white;
+    margin-bottom: var(--sp-6);
+  }
+
+  .wow-body {
+    font-size: var(--text-lg);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 44ch;
+    text-wrap: pretty;
+  }
+
+  /* ── Demo card — light mode application window ── */
+  .demo-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.04),
+      0 24px 64px rgba(0, 0, 0, 0.28),
+      0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .demo-header {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: 10px var(--sp-5);
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+  }
+
+  .demo-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .demo-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .demo-dots span:nth-child(1) { background: #ff5f57; }
+  .demo-dots span:nth-child(2) { background: #febc2e; }
+  .demo-dots span:nth-child(3) { background: #28c840; }
+
+  .demo-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: #94a3b8;
+    letter-spacing: 0;
+  }
+
+  .demo-body {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  @media (max-width: 500px) {
+    .demo-body {
+      grid-template-columns: 1fr;
+    }
+    .demo-arrow { display: none; }
+  }
+
+  .demo-intake {
+    padding: var(--sp-5) var(--sp-6);
+    border-right: 1px solid #e2e8f0;
+  }
+
+  .demo-output {
+    padding: var(--sp-5) var(--sp-6);
+  }
+
+  .demo-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: var(--sp-4);
+    font-family: var(--font-body);
+  }
+
+  .demo-field {
+    display: flex;
+    gap: var(--sp-4);
+    padding: var(--sp-2) 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.8125rem;
+  }
+
+  .demo-field:last-child { border-bottom: none; }
+
+  .field-key {
+    font-family: var(--font-mono);
+    color: #94a3b8;
+    min-width: 88px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+
+  .field-val {
+    font-family: var(--font-mono);
+    color: #1e293b;
+    font-weight: 500;
+  }
+
+  .demo-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--sp-4);
+    flex-shrink: 0;
+  }
+
+  /* Generated doc rows */
+  .demo-doc {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-3);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    color: #374151;
+    margin-bottom: var(--sp-2);
+    opacity: 0;
+    animation: docAppear 0.4s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0ms) forwards;
+    animation-play-state: paused;
+  }
+
+  .demo-doc:last-child { margin-bottom: 0; }
+
+  .demo-card.is-visible .demo-doc {
+    animation-play-state: running;
+  }
+
+  @keyframes docAppear {
+    from { opacity: 0; transform: translateX(8px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .doc-icon { color: var(--teal); flex-shrink: 0; display: flex; }
+
+  .demo-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-3) var(--sp-6);
+    border-top: 1px solid #e2e8f0;
+    background: #f8fafc;
+  }
+
+  .demo-timing {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--teal);
+    font-weight: 600;
+  }
+
+  .demo-count {
+    font-size: var(--text-xs);
+    color: #94a3b8;
+    font-family: var(--font-body);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .demo-doc { animation: none; opacity: 1; transform: none; }
+  }
+</style>
+
+<script>
+  // Trigger doc animations when the card enters the viewport
+  const card = document.querySelector<HTMLElement>('.demo-card');
+  if (card) {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          card.classList.add('is-visible');
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    obs.observe(card);
+  }
+</script>

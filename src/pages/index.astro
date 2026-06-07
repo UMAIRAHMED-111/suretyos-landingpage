@@ -1,0 +1,106 @@
+---
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Problem from '../components/Problem.astro';
+import Solution from '../components/Solution.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import WowMoment from '../components/WowMoment.astro';
+import ROI from '../components/ROI.astro';
+import FoundingOffer from '../components/FoundingOffer.astro';
+import FounderNote from '../components/FounderNote.astro';
+import FAQ from '../components/FAQ.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SuretyOS — The operating system for surety bond agencies. Fill one form, generate every document automatically, and never miss a renewal again." />
+  <title>SuretyOS — The operating system for surety bond agencies</title>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Space Grotesk · Inter · JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="SuretyOS — The operating system for surety bond agencies" />
+  <meta property="og:description" content="Fill one form, generate every document automatically, and never miss a renewal again. Built by people who've lived the workflow." />
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <Nav />
+
+  <main id="main">
+    <Hero />
+    <Problem />
+    <Solution />
+    <HowItWorks />
+    <WowMoment />
+    <ROI />
+    <FoundingOffer />
+    <FounderNote />
+    <FAQ />
+    <FinalCTA />
+  </main>
+
+  <Footer />
+</body>
+</html>
+
+<script>
+  // Mark JS as available — reveals the hidden-until-revealed CSS state
+  document.documentElement.classList.add('js');
+
+  // Scroll reveal via IntersectionObserver
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08, rootMargin: '0px 0px -32px 0px' }
+  );
+
+  document.querySelectorAll('[data-reveal]').forEach((el) => {
+    revealObserver.observe(el);
+  });
+
+  // Nav background on scroll
+  const nav = document.querySelector<HTMLElement>('.site-nav');
+  if (nav) {
+    const handler = () => {
+      nav.classList.toggle('is-scrolled', window.scrollY > 60);
+    };
+    window.addEventListener('scroll', handler, { passive: true });
+    handler(); // run once on load
+  }
+
+  // Developer Easter egg
+  console.log(
+    '%c SuretyOS ',
+    'background:#1a3a5c;color:#02c39a;font-size:14px;font-weight:800;padding:5px 10px;border-radius:6px;letter-spacing:0.04em;'
+  );
+  console.log(
+    '%c The operating system for surety bond agencies.',
+    'color:#0e7c86;font-size:12px;font-weight:500;'
+  );
+  console.log(
+    '%c Built with Astro + Supabase. Say hello: hello@suretyos.com',
+    'color:#6b7280;font-size:11px;'
+  );
+</script>

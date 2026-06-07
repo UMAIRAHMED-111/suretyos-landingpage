@@ -1,0 +1,501 @@
+---
+---
+
+<section class="hero section--navy" aria-labelledby="hero-heading">
+  <canvas class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="container hero-grid">
+
+    <!-- Left: copy + CTA -->
+    <div class="hero-copy">
+      <h1 id="hero-heading" class="u-display hero-heading" data-reveal>
+        The operating system for surety bond agencies.
+      </h1>
+
+      <p class="hero-sub" data-reveal data-delay="1">
+        One intake form populates every required document automatically.
+        Renewal tracking built in for the life of every bond.
+      </p>
+
+      <div class="hero-actions" data-reveal data-delay="2">
+        <a href="#signup" class="btn btn-primary btn-primary-lg">
+          Join the Founding Program &rarr;
+        </a>
+        <p class="hero-caveat">
+          Limited to the first 25 agencies. Lifetime founder pricing.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right: before/after visual comparison -->
+    <div class="hero-visual" aria-hidden="true" data-reveal data-delay="2">
+
+      <!-- Before: manual chaos -->
+      <div class="before-panel">
+        <div class="panel-header">
+          <p class="panel-label">Without SuretyOS</p>
+          <span class="time-badge">~45 min/bond</span>
+        </div>
+        <ul class="file-list">
+          <li class="file-row">
+            <span class="file-ext docx">DOC</span>
+            <span class="file-name">Bond_v3_FINAL_2.docx</span>
+          </li>
+          <li class="file-row">
+            <span class="file-ext docx">DOC</span>
+            <span class="file-name">POA_template_edit.docx</span>
+          </li>
+          <li class="file-row">
+            <span class="file-ext xlsx">XLS</span>
+            <span class="file-name">Renewals_2024.xlsx</span>
+          </li>
+          <li class="file-row">
+            <span class="file-ext email">MSG</span>
+            <span class="file-name">Re: Re: Re: Bond Request</span>
+          </li>
+        </ul>
+        <p class="before-note">Same client data. Entered into each one by hand.</p>
+      </div>
+
+      <!-- Arrow connector -->
+      <div class="transform-arrow" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- After: SuretyOS app window -->
+      <div class="after-panel">
+        <!-- macOS window chrome -->
+        <div class="app-chrome">
+          <div class="app-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="app-name">SuretyOS</span>
+          <span class="app-badge">Generated in 3s</span>
+        </div>
+        <!-- Record header -->
+        <div class="app-record">
+          <p class="record-title">Guardianship Bond — John Smith</p>
+          <p class="record-meta">Miami-Dade County · $150,000</p>
+        </div>
+        <!-- Generated documents -->
+        <ul class="doc-list">
+          <li class="doc-row">
+            <span class="doc-check" aria-hidden="true">
+              <svg width="9" height="7" viewBox="0 0 10 8" fill="none">
+                <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Bond form
+          </li>
+          <li class="doc-row">
+            <span class="doc-check" aria-hidden="true">
+              <svg width="9" height="7" viewBox="0 0 10 8" fill="none">
+                <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Power of attorney
+          </li>
+          <li class="doc-row">
+            <span class="doc-check" aria-hidden="true">
+              <svg width="9" height="7" viewBox="0 0 10 8" fill="none">
+                <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Indemnity agreement
+          </li>
+          <li class="doc-row">
+            <span class="doc-check" aria-hidden="true">
+              <svg width="9" height="7" viewBox="0 0 10 8" fill="none">
+                <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Court cover sheet
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: 9rem;
+    padding-bottom: var(--sp-24);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-16);
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (min-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 54% 1fr;
+      gap: var(--sp-16);
+    }
+  }
+
+  /* ── Copy ── */
+  .hero-heading {
+    color: white;
+    margin-bottom: var(--sp-6);
+  }
+
+  .hero-sub {
+    font-size: var(--text-lg);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 52ch;
+    margin-bottom: var(--sp-8);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-3);
+  }
+
+  .hero-caveat {
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 500;
+  }
+
+  /* ── Illustration ── */
+  .hero-visual {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-4);
+    }
+  }
+
+  /* ── Before panel ── */
+  .before-panel {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--sp-3);
+  }
+
+  .panel-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-family: var(--font-body);
+  }
+
+  .time-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2px 7px;
+    border-radius: 100px;
+  }
+
+  .file-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-3);
+  }
+
+  .file-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-3);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .file-ext {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 2px 5px;
+    border-radius: 3px;
+    line-height: 1.4;
+  }
+
+  .file-ext.docx  { background: rgba(21, 101, 192, 0.25); color: #90caf9; }
+  .file-ext.xlsx  { background: rgba(27, 94, 32, 0.25);  color: #a5d6a7; }
+  .file-ext.email { background: rgba(74, 20, 140, 0.25); color: #ce93d8; }
+
+  .file-name {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: var(--font-mono);
+  }
+
+  .before-note {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.35);
+    font-family: var(--font-body);
+    padding-top: var(--sp-3);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  /* ── Arrow connector ── */
+  .transform-arrow {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── After panel: macOS app window ── */
+  .after-panel {
+    flex: 1.35;
+    min-width: 0;
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.06),
+      0 20px 56px rgba(0, 0, 0, 0.32),
+      0 6px 16px rgba(0, 0, 0, 0.12);
+    color: var(--ink);
+  }
+
+  /* Window chrome */
+  .app-chrome {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: 11px 16px;
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .app-dots {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .app-dots span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .app-dots span:nth-child(1) { background: #ff5f57; }
+  .app-dots span:nth-child(2) { background: #febc2e; }
+  .app-dots span:nth-child(3) { background: #28c840; }
+
+  .app-name {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    flex: 1;
+    padding-left: var(--sp-2);
+    letter-spacing: -0.01em;
+  }
+
+  .app-badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: #16a34a;
+    background: #dcfce7;
+    padding: 3px 9px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  /* Record header */
+  .app-record {
+    padding: var(--sp-5) var(--sp-6) var(--sp-4);
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .record-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+    margin-bottom: 3px;
+  }
+
+  .record-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #94a3b8;
+  }
+
+  /* Document list */
+  .doc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: var(--sp-4) var(--sp-6);
+    gap: var(--sp-3);
+  }
+
+  .doc-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-size: 0.875rem;
+    color: #374151;
+    font-weight: 500;
+    font-family: var(--font-body);
+  }
+
+  .doc-check {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--teal);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Load animations */
+  .hero-heading {
+    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  }
+  .hero-sub {
+    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+  }
+  .hero-actions {
+    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-heading,
+    .hero-sub,
+    .hero-actions { animation: none; }
+  }
+</style>
+
+<script>
+(function () {
+  const canvas = document.querySelector<HTMLCanvasElement>('.hero-canvas');
+  if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const ctx = canvas.getContext('2d')!;
+  let W = 0, H = 0;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  // Particle config
+  const COUNT      = 65;
+  const MAX_DIST   = 140;
+  const DOT_COLOR  = 'rgba(255,255,255,';
+  const LINE_COLOR = 'rgba(14,124,134,';
+
+  interface P { x: number; y: number; vx: number; vy: number; r: number; o: number }
+
+  const pts: P[] = Array.from({ length: COUNT }, () => ({
+    x:  Math.random() * W,
+    y:  Math.random() * H,
+    vx: (Math.random() - 0.5) * 0.38,
+    vy: (Math.random() - 0.5) * 0.38,
+    r:  Math.random() * 1.2 + 0.4,
+    o:  Math.random() * 0.18 + 0.07,
+  }));
+
+  let raf: number;
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Connections first (drawn under dots)
+    for (let i = 0; i < COUNT; i++) {
+      for (let j = i + 1; j < COUNT; j++) {
+        const dx = pts[i].x - pts[j].x;
+        const dy = pts[i].y - pts[j].y;
+        const d  = Math.sqrt(dx * dx + dy * dy);
+        if (d < MAX_DIST) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = LINE_COLOR + ((1 - d / MAX_DIST) * 0.2) + ')';
+          ctx.lineWidth = 0.65;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Dots
+    for (const p of pts) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = DOT_COLOR + p.o + ')';
+      ctx.fill();
+    }
+
+    raf = requestAnimationFrame(frame);
+  }
+
+  frame();
+})();
+</script>

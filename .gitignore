@@ -1,0 +1,16 @@
+node_modules
+.env
+dist
+.astro
+
+# macOS
+.DS_Store
+
+# IDE / tool config (personal)
+.cursor/
+.agents/
+.claude/
+.playwright-mcp/
+
+# Development screenshots
+*.png

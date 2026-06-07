@@ -1,0 +1,387 @@
+---
+import SignupForm from './SignupForm.tsx';
+
+const benefits = [
+  'Lifetime founder pricing — locked in, never increases',
+  'Direct line to the founders — your feedback builds the roadmap',
+  'First access before public launch',
+  'Free white-glove setup and data migration',
+];
+---
+
+<section id="signup" class="section section--navy founding-section" aria-labelledby="founding-heading">
+  <div class="container founding-grid">
+
+    <!-- Left: offer copy -->
+    <div class="founding-copy" data-reveal>
+      <h2 id="founding-heading" class="u-headline founding-heading">
+        Join the Founding Program.
+      </h2>
+
+      <p class="founding-desc">
+        A limited program for agencies that want to influence the roadmap and secure
+        lifetime pricing before public launch.
+      </p>
+
+      <ul class="benefits-list" role="list">
+        {benefits.map((b) => (
+          <li class="benefit-item">
+            <span class="benefit-check" aria-hidden="true">
+              <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
+                <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            {b}
+          </li>
+        ))}
+      </ul>
+
+      <p class="spots-remaining">
+        <span class="spots-count">25</span> founding spots remaining
+      </p>
+    </div>
+
+    <!-- Right: form -->
+    <div class="form-wrapper" data-reveal data-delay="1">
+      <SignupForm client:load />
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .founding-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-12);
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .founding-grid {
+      grid-template-columns: 40% 1fr;
+      gap: var(--sp-16);
+      align-items: start;
+    }
+  }
+
+  /* ── Offer copy ── */
+  .founding-heading {
+    color: white;
+    margin-bottom: var(--sp-5);
+  }
+
+  .founding-desc {
+    font-size: var(--text-lg);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: var(--sp-8);
+    max-width: 38ch;
+    text-wrap: pretty;
+  }
+
+  .benefits-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-8);
+  }
+
+  .benefit-item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-3);
+    font-size: var(--text-base);
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.55;
+  }
+
+  .benefit-check {
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--mint);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px; /* optical baseline alignment */
+  }
+
+  .spots-remaining {
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+  }
+
+  .spots-count {
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: var(--mint);
+    font-size: var(--text-base);
+  }
+
+  /* ── Form card ── */
+  .form-wrapper {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--sp-8) var(--sp-8);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 480px) {
+    .form-wrapper {
+      padding: var(--sp-6) var(--sp-5);
+    }
+  }
+</style>
+
+<style is:global>
+  /* ── Form styles (global so they reach the React island) ── */
+
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+
+  .field-label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+  }
+
+  .optional-label {
+    font-weight: 400;
+    color: var(--ink-secondary);
+  }
+
+  .field-input,
+  .field-textarea {
+    width: 100%;
+    padding: 0.75rem 0.875rem;
+    border: 1.5px solid rgba(26, 58, 92, 0.2);
+    border-radius: var(--radius-md);
+    font-family: var(--font);
+    font-size: var(--text-base);
+    color: var(--ink);
+    background: white;
+    line-height: 1.5;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .field-input::placeholder,
+  .field-textarea::placeholder {
+    color: var(--ink-tertiary);
+  }
+
+  .field-input:focus,
+  .field-textarea:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(14, 124, 134, 0.12);
+  }
+
+  .field-input--error {
+    border-color: #dc2626;
+  }
+  .field-input--error:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+  }
+
+  .field-textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .field-error {
+    font-size: var(--text-xs);
+    color: #dc2626;
+    font-weight: 500;
+    margin-top: var(--sp-1);
+  }
+
+  .fieldset-no-border {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .fieldset-no-border legend {
+    float: left;
+    width: 100%;
+    margin-bottom: var(--sp-2);
+  }
+
+  .fieldset-no-border legend + * {
+    clear: left;
+  }
+
+  /* Bond type pills */
+  .pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.4375rem 0.875rem;
+    border: 1.5px solid rgba(26, 58, 92, 0.2);
+    border-radius: 100px;
+    background: white;
+    font-family: var(--font);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.12s ease, background 0.12s ease, color 0.12s ease;
+    line-height: 1;
+  }
+
+  .pill:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+
+  .pill:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  .pill--selected {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: white;
+  }
+
+  .pill--selected:hover {
+    background: var(--teal-hover);
+    border-color: var(--teal-hover);
+    color: white;
+  }
+
+  /* Volume radio buttons */
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+
+  .radio-item {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    cursor: pointer;
+    padding: var(--sp-2) 0;
+  }
+
+  .radio-input {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid rgba(26, 58, 92, 0.3);
+    border-radius: 50%;
+    appearance: none;
+    -webkit-appearance: none;
+    background: white;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-color 0.12s ease, background 0.12s ease;
+    position: relative;
+  }
+
+  .radio-input:checked {
+    border-color: var(--teal);
+    background: var(--teal);
+  }
+
+  .radio-input:checked::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: white;
+    border-radius: 50%;
+  }
+
+  .radio-input:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  .radio-label {
+    font-size: var(--text-base);
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  /* Submit button */
+  .submit-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: var(--sp-2);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .server-error {
+    font-size: var(--text-sm);
+    color: #dc2626;
+    padding: var(--sp-3) var(--sp-4);
+    background: rgba(220, 38, 38, 0.06);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+  }
+
+  /* Success state */
+  .form-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-4);
+    padding: var(--sp-8) var(--sp-4);
+    animation: successFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes successFadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .success-icon { flex-shrink: 0; }
+
+  .success-title {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+
+  .success-body {
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: var(--ink-secondary);
+    max-width: 36ch;
+    text-wrap: pretty;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .form-success { animation: none; }
+  }
+</style>

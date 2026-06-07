@@ -1,0 +1,84 @@
+---
+---
+
+<header class="site-nav" role="banner">
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo" aria-label="SuretyOS home">
+      <svg class="logo-mark" width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <!-- Circular seal body -->
+        <circle cx="13" cy="13" r="12" fill="#0e7c86"/>
+        <!-- Subtle inner rim — gives it a stamped/embossed depth -->
+        <circle cx="13" cy="13" r="10.5" stroke="rgba(255,255,255,0.12)" stroke-width="0.75" fill="none"/>
+        <!-- Geometric S: three-segment path
+             Upper arch (right → over top → left),
+             diagonal spine (left upper → right lower),
+             lower arch (right → under bottom → left) -->
+        <path d="M16 9C16 6 10 6 10 9C10 12 16 14 16 17C16 20 10 20 10 17"
+              stroke="white" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      SuretyOS
+    </a>
+
+    <a href="#signup" class="btn btn-primary nav-cta">
+      Request Early Access
+    </a>
+  </div>
+</header>
+
+<style>
+  .site-nav {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: var(--z-sticky);
+    /* starts transparent — hero is navy so it looks seamless */
+    background: transparent;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .site-nav.is-scrolled {
+    background: var(--navy);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    color: white;
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1;
+  }
+
+  .nav-logo:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+  }
+
+  .logo-mark {
+    flex-shrink: 0;
+  }
+
+  .nav-cta {
+    padding: 0.625rem 1.125rem;
+    font-size: 0.9375rem;
+  }
+
+  @media (max-width: 400px) {
+    .nav-cta {
+      padding: 0.5rem 0.875rem;
+      font-size: 0.875rem;
+    }
+  }
+</style>

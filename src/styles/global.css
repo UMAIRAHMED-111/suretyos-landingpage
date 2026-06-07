@@ -1,0 +1,268 @@
+/* ─── Design Tokens ─────────────────────────────────────────────── */
+:root {
+  /* Brand palette */
+  --navy:          #0e2744;
+  --teal:          #0e7c86;
+  --teal-hover:    #0c6a73;
+  --mint:          #0d9f7e;
+  --filing:        #eef3f8;
+  --white:         #ffffff;
+  --ink:           #1f1f2e;
+  --ink-secondary: #475569;   /* high contrast on white: ~7:1 */
+  --ink-tertiary:  #6b7280;   /* captions only, large enough size */
+
+  /* Semantic backgrounds */
+  --bg-dark:    var(--navy);
+  --bg-light:   var(--white);
+  --bg-subtle:  var(--filing);
+
+  /* Z-index scale */
+  --z-base:           0;
+  --z-sticky:       100;
+  --z-modal-back:   200;
+  --z-modal:        300;
+  --z-toast:        400;
+  --z-tooltip:      500;
+
+  /* Spacing (4px base) */
+  --sp-1:  0.25rem;   /*  4px */
+  --sp-2:  0.5rem;    /*  8px */
+  --sp-3:  0.75rem;   /* 12px */
+  --sp-4:  1rem;      /* 16px */
+  --sp-5:  1.25rem;   /* 20px */
+  --sp-6:  1.5rem;    /* 24px */
+  --sp-8:  2rem;      /* 32px */
+  --sp-10: 2.5rem;    /* 40px */
+  --sp-12: 3rem;      /* 48px */
+  --sp-16: 4rem;      /* 64px */
+  --sp-20: 5rem;      /* 80px */
+  --sp-24: 6rem;      /* 96px */
+  --sp-32: 8rem;      /* 128px */
+
+  /* Typography */
+  --font-display: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-body:    "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono:    "JetBrains Mono", "Fira Code", monospace;
+  --font: var(--font-body);
+
+  --text-xs:       0.75rem;    /* 12px — legal, tiny labels */
+  --text-sm:       0.8125rem;  /* 13px — labels, metadata */
+  --text-base:     1.0625rem;  /* 17px — body */
+  --text-lg:       1.125rem;   /* 18px — lead text */
+  --text-title:    1.25rem;    /* 20px — card headings */
+  --text-headline: clamp(1.625rem, 3.5vw, 2.375rem);
+  --text-display:  clamp(2.5rem, 6vw, 4.5rem);
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-card: 0 2px 12px rgba(26, 58, 92, 0.08);
+  --shadow-card-hover: 0 6px 24px rgba(26, 58, 92, 0.14);
+  --shadow-teal: 0 4px 16px rgba(14, 124, 134, 0.3);
+}
+
+/* ─── Reset ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+}
+
+img, svg, video { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+button { font-family: inherit; }
+
+/* ─── Accessibility ──────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--sp-4);
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--teal);
+  color: white;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  z-index: var(--z-tooltip);
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* ─── Layout ─────────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+}
+
+@media (min-width: 768px) {
+  .container { padding: 0 var(--sp-12); }
+}
+
+/* ─── Typography utilities ───────────────────────────────────────── */
+.u-display {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.u-headline {
+  font-family: var(--font-display);
+  font-size: var(--text-headline);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.u-title {
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.u-mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1;
+}
+
+.u-body {
+  font-size: var(--text-base);
+  line-height: 1.65;
+  max-width: 65ch;
+  text-wrap: pretty;
+}
+
+.u-label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 0.875rem 1.75rem;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 3px;
+}
+
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: var(--teal);
+  color: white;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--teal-hover);
+  box-shadow: 0 4px 20px rgba(14, 124, 134, 0.4), 0 1px 4px rgba(14, 124, 134, 0.2);
+  transform: translateY(-1px);
+}
+.btn-primary:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 1px 4px rgba(14, 124, 134, 0.2);
+  transition-duration: 0.06s;
+}
+
+.btn-primary-lg {
+  padding: 1.0625rem 2rem;
+  font-size: 1.0625rem;
+}
+
+.btn-ghost-light {
+  background: transparent;
+  color: white;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+}
+.btn-ghost-light:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* ─── Section spacing ────────────────────────────────────────────── */
+.section {
+  padding: var(--sp-20) 0;
+}
+
+@media (min-width: 768px) {
+  .section { padding: var(--sp-32) 0; }
+}
+
+.section--navy  { background: var(--navy);  color: white; }
+.section--white { background: var(--white); color: var(--ink); }
+.section--filing{ background: var(--filing); color: var(--ink); }
+
+/* ─── Scroll reveal ─────────────────────────────────────────────── */
+/* Default: visible (no-JS, crawlers, headless renderers, reduced-motion). */
+/* .js class on <html> (added by script) enables the hidden-until-revealed state. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays */
+.js [data-delay="1"] { transition-delay:  80ms; }
+.js [data-delay="2"] { transition-delay: 160ms; }
+.js [data-delay="3"] { transition-delay: 240ms; }
+.js [data-delay="4"] { transition-delay: 320ms; }
+.js [data-delay="5"] { transition-delay: 400ms; }
+
+/* ─── Reduced motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

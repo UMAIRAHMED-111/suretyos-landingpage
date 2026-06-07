@@ -1,0 +1,156 @@
+---
+const faqs = [
+  {
+    q: 'Is this another generic insurance platform?',
+    a: 'No. SuretyOS is built specifically for surety bond workflows: intake, document generation, and renewals for commercial, court, and construction bonds. It is not adapted from P&C software.',
+  },
+  {
+    q: 'Is my data secure?',
+    a: 'SOC 2-aligned architecture from day one. Encryption in transit and at rest. Your data is yours, exportable at any time in standard formats. No vendor lock-in.',
+  },
+  {
+    q: 'When does it launch?',
+    a: 'We are onboarding founding agencies in waves as we build. Join now to secure your spot and lifetime pricing. We will be in touch within 48 hours to schedule a call.',
+  },
+];
+---
+
+<section class="section section--filing" aria-labelledby="faq-heading">
+  <div class="container faq-inner">
+
+    <h2 id="faq-heading" class="u-headline faq-heading" data-reveal>
+      Common questions
+    </h2>
+
+    <dl class="faq-list">
+      {faqs.map((faq, i) => (
+        <details class="faq-item" data-reveal data-delay={String((i % 5) + 1)}>
+          <summary class="faq-question">
+            <span>{faq.q}</span>
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <dd class="faq-answer">
+            <p>{faq.a}</p>
+          </dd>
+        </details>
+      ))}
+    </dl>
+
+  </div>
+</section>
+
+<style>
+  .faq-inner {
+    max-width: 760px;
+  }
+
+  .faq-heading {
+    color: var(--navy);
+    margin-bottom: var(--sp-10);
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(26, 58, 92, 0.12);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(26, 58, 92, 0.12);
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    padding: var(--sp-5) 0;
+    cursor: pointer;
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--navy);
+    list-style: none;
+    line-height: 1.45;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Remove default triangle in webkit */
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-question::marker { display: none; }
+
+  .faq-question:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  .faq-chevron {
+    flex-shrink: 0;
+    color: var(--teal);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  details[open] .faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    margin: 0;
+    overflow: hidden;
+    height: 0;
+    transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .faq-answer p {
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: var(--ink-secondary);
+    padding-bottom: var(--sp-5);
+    max-width: 58ch;
+    text-wrap: pretty;
+  }
+
+  @media (min-width: 640px) {
+    .faq-question { font-size: var(--text-lg); }
+    .faq-answer p  { font-size: var(--text-lg); }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>('.faq-item').forEach((details) => {
+    const summary = details.querySelector('.faq-question')!;
+    const answer  = details.querySelector<HTMLElement>('.faq-answer')!;
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      if (details.open) {
+        // Collapse
+        answer.style.height = answer.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+          answer.style.height = '0';
+        });
+        setTimeout(() => {
+          details.open = false;
+          answer.style.height = '';
+        }, 360);
+      } else {
+        // Expand
+        details.open = true;
+        const h = answer.scrollHeight;
+        answer.style.height = '0';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            answer.style.height = h + 'px';
+          });
+        });
+        answer.addEventListener('transitionend', () => {
+          answer.style.height = '';
+        }, { once: true });
+      }
+    });
+  });
+</script>

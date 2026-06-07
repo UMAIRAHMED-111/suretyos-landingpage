@@ -1,0 +1,133 @@
+---
+const steps = [
+  {
+    n: 1,
+    title: 'Collect',
+    body: 'Send a form link. The client submits once and structured data lands in your dashboard.',
+  },
+  {
+    n: 2,
+    title: 'Generate',
+    body: 'Click once. Every required document comes out pre-filled and ready to execute.',
+  },
+  {
+    n: 3,
+    title: 'Track',
+    body: 'The bond lives in your repository with automatic renewal alerts for its entire life.',
+  },
+];
+---
+
+<section class="section section--white" aria-labelledby="how-heading">
+  <div class="container">
+
+    <div class="how-header" data-reveal>
+      <h2 id="how-heading" class="u-headline">
+        From application to issued bond in minutes, not days.
+      </h2>
+    </div>
+
+    <ol class="steps-row" role="list">
+      {steps.map((step, i) => (
+        <li class="step" data-reveal data-delay={String(i + 1)}>
+          <div class="step-number" aria-hidden="true">{step.n}</div>
+          <div class="step-body">
+            <h3 class="u-title step-title">{step.title}</h3>
+            <p class="step-desc">{step.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+  </div>
+</section>
+
+<style>
+  .how-header {
+    margin-bottom: var(--sp-12);
+  }
+
+  .how-header h2 {
+    color: var(--navy);
+    max-width: 30ch;
+  }
+
+  /* Step row: horizontal on desktop, vertical on mobile */
+  .steps-row {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-10);
+    position: relative;
+  }
+
+  @media (min-width: 700px) {
+    .steps-row {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-8);
+    }
+
+    /* Connecting rule between steps */
+    .steps-row::after {
+      content: '';
+      position: absolute;
+      top: 20px; /* center of 40px circle */
+      left: 40px;  /* right edge of circle 1 */
+      right: calc((100% - 2 * var(--sp-8)) / 3); /* left edge of circle 3 */
+      height: 1px;
+      background: rgba(14, 124, 134, 0.2);
+      pointer-events: none;
+      z-index: 0;
+    }
+  }
+
+  .step {
+    display: flex;
+    gap: var(--sp-4);
+    align-items: flex-start;
+  }
+
+  @media (min-width: 700px) {
+    .step {
+      flex-direction: column;
+      gap: var(--sp-4);
+    }
+  }
+
+  .step-number {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--teal);
+    color: white;
+    border-radius: 50%;
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 0 5px rgba(14, 124, 134, 0.12), 0 0 0 10px rgba(14, 124, 134, 0.05);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .step:hover .step-number {
+    box-shadow: 0 0 0 6px rgba(14, 124, 134, 0.18), 0 0 0 12px rgba(14, 124, 134, 0.07);
+    transform: scale(1.08);
+  }
+
+  .step-title {
+    color: var(--navy);
+    margin-bottom: var(--sp-2);
+  }
+
+  .step-desc {
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: var(--ink-secondary);
+    max-width: 32ch;
+    text-wrap: pretty;
+  }
+</style>

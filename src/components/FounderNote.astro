@@ -1,0 +1,101 @@
+---
+const pillars = [
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7l-9-5z"/></svg>`,
+    label: 'Surety-specific',
+    desc: 'Built for court, commercial, and construction bonds. Not general insurance software adapted for surety.',
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="22" height="14" rx="2"/><path d="M6 7V5a6 6 0 0112 0v2"/></svg>`,
+    label: 'SOC 2-aligned',
+    desc: 'Encrypted in transit and at rest. Your data is exportable at any time in standard formats.',
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>`,
+    label: 'Founder-built',
+    desc: 'Built by people who have worked Florida court bond workflows by hand. Not a guess at what agencies need.',
+  },
+];
+---
+
+<section class="section section--white trust-section" aria-labelledby="trust-heading">
+  <div class="container">
+
+    <p id="trust-heading" class="trust-label" data-reveal>Why agencies choose SuretyOS</p>
+
+    <div class="trust-grid">
+      {pillars.map((p, i) => (
+        <div class="trust-col" data-reveal data-delay={String(i + 1)}>
+          <span class="trust-icon" aria-hidden="true" set:html={p.icon} />
+          <h3 class="trust-col-label">{p.label}</h3>
+          <p class="trust-col-desc">{p.desc}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .trust-label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--ink-tertiary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: var(--sp-10);
+  }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid rgba(14, 39, 68, 0.1);
+  }
+
+  @media (min-width: 700px) {
+    .trust-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .trust-col {
+    padding: var(--sp-8) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    border-bottom: 1px solid rgba(14, 39, 68, 0.1);
+  }
+
+  @media (min-width: 700px) {
+    .trust-col {
+      padding: var(--sp-8) var(--sp-8) var(--sp-8) 0;
+      border-bottom: none;
+    }
+
+    .trust-col + .trust-col {
+      padding-left: var(--sp-8);
+      border-left: 1px solid rgba(14, 39, 68, 0.1);
+    }
+  }
+
+  .trust-icon {
+    display: flex;
+    color: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .trust-col-label {
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+
+  .trust-col-desc {
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: var(--ink-secondary);
+    text-wrap: pretty;
+  }
+</style>

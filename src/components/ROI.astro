@@ -1,0 +1,156 @@
+---
+const stats = [
+  {
+    figure: '30+ minutes',
+    countTo: 30,
+    prefix: '',
+    suffix: '+ minutes',
+    context: 'saved per bond in document prep and data entry, eliminated.',
+  },
+  {
+    figure: '300+ hours a year',
+    countTo: 300,
+    prefix: '',
+    suffix: '+ hours a year',
+    context: 'recovered for a 600-bond agency. Eight weeks of work, back.',
+  },
+  {
+    figure: 'Zero missed renewals',
+    countTo: null,
+    context: 'preventing even two lost clients a year covers the annual cost.',
+  },
+  {
+    figure: '$15,000–$35,000',
+    countTo: 15,
+    prefix: '$',
+    suffix: ',000–$35,000',
+    context: 'in recovered time and avoided losses, every year.',
+  },
+];
+---
+
+<section class="section section--white" aria-labelledby="roi-heading">
+  <div class="container">
+
+    <div class="roi-header" data-reveal>
+      <h2 id="roi-heading" class="u-headline">
+        It pays for itself on saved time alone.
+      </h2>
+    </div>
+
+    <div class="roi-grid">
+      {stats.map((s, i) => (
+        <div class="roi-row" data-reveal data-delay={String(i + 1)}>
+          <span
+            class="roi-figure"
+            data-count-to={s.countTo ?? ''}
+            data-count-prefix={s.prefix ?? ''}
+            data-count-suffix={s.suffix ?? ''}
+          >{s.figure}</span>
+          <p class="roi-context">{s.context}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="roi-cta" data-reveal>
+      <a href="#signup" class="btn btn-primary btn-primary-lg">
+        Join the Founding Program &rarr;
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .roi-header {
+    margin-bottom: var(--sp-12);
+  }
+
+  .roi-header h2 {
+    color: var(--navy);
+    max-width: 26ch;
+  }
+
+  /* Stat rows — not hero-metric cards */
+  .roi-grid {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--filing);
+    margin-bottom: var(--sp-12);
+  }
+
+  .roi-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-2);
+    padding: var(--sp-6) 0;
+    border-bottom: 1px solid var(--filing);
+    align-items: baseline;
+  }
+
+  @media (min-width: 640px) {
+    .roi-row {
+      grid-template-columns: 260px 1fr;
+      gap: var(--sp-8);
+    }
+  }
+
+  .roi-figure {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (min-width: 640px) {
+    .roi-figure { font-size: 1.75rem; }
+  }
+
+  .roi-context {
+    font-size: var(--text-lg);
+    line-height: 1.55;
+    color: var(--ink-secondary);
+    max-width: 52ch;
+    text-wrap: pretty;
+  }
+
+  .roi-cta { margin-top: var(--sp-4); }
+</style>
+
+<script>
+  const DURATION = 1400;
+
+  function easeOutExpo(t: number) {
+    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+  }
+
+  function animateCounter(el: HTMLElement, target: number, prefix: string, suffix: string) {
+    const start = performance.now();
+    function step(now: number) {
+      const elapsed = now - start;
+      const t = Math.min(elapsed / DURATION, 1);
+      const value = Math.round(easeOutExpo(t) * target);
+      el.textContent = prefix + value + suffix;
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target as HTMLElement;
+      const target = parseInt(el.dataset.countTo || '', 10);
+      if (!target) return;
+      observer.unobserve(el);
+      animateCounter(el, target, el.dataset.countPrefix || '', el.dataset.countSuffix || '');
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll<HTMLElement>('[data-count-to]').forEach((el) => {
+    if (el.dataset.countTo) observer.observe(el);
+  });
+</script>
