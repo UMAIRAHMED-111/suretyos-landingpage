@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <!-- Rounded square tile -->
-  <rect width="32" height="32" rx="8" fill="#0e7c86"/>
-  <!-- Subtle inner ring matching the nav seal -->
-  <circle cx="16" cy="16" r="13" stroke="rgba(255,255,255,0.12)" stroke-width="0.75" fill="none"/>
-  <!-- S letterform — same geometry as the nav logo, scaled to 32×32 space -->
-  <path d="M20 10.5C20 7 12 7 12 10.5C12 14 20 16 20 19.5C20 23 12 23 12 19.5"
-        stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Navy tile -->
+  <rect width="48" height="48" rx="10" fill="#0e2744"/>
+  <!-- Ledger-S: top row -> down-left -> middle row -> down-right -> bottom row -->
+  <path d="M33 15 H15 V24 H33 V33 H15"
+        stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Consolidated middle row, in Action Mint -->
+  <rect x="15" y="21" width="18" height="6" rx="3" fill="#0d9f7e"/>
 </svg>

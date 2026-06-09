@@ -1,6 +1,7 @@
 ---
 import FounderNote from '../components/FounderNote.astro';
 import Footer from '../components/Footer.astro';
+import LogoMark from '../components/LogoMark.astro';
 import '../styles/global.css';
 ---
 
@@ -36,12 +37,7 @@ import '../styles/global.css';
   <header class="page-nav" role="banner">
     <div class="container page-nav-inner">
       <a href="/" class="page-logo" aria-label="SuretyOS home">
-        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
-          <circle cx="13" cy="13" r="12" fill="#0e7c86"/>
-          <circle cx="13" cy="13" r="10.5" stroke="rgba(255,255,255,0.12)" stroke-width="0.75" fill="none"/>
-          <path d="M16 9C16 6 10 6 10 9C10 12 16 14 16 17C16 20 10 20 10 17"
-                stroke="white" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
+        <LogoMark size={36} />
         SuretyOS
       </a>
       <a href="/#signup" class="btn btn-primary page-nav-cta">Join the Program</a>

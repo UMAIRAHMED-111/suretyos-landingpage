@@ -1,4 +1,6 @@
 ---
+import LogoMark from './LogoMark.astro';
+
 const year = 2026;
 const linkedin = 'https://www.linkedin.com/in/umair-ahmed-3675261b0/';
 
@@ -15,12 +17,7 @@ const productLinks = [
 
     <div class="footer-brand">
       <a href="/" class="footer-logo" aria-label="SuretyOS home">
-        <svg class="footer-mark" width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true">
-          <circle cx="13" cy="13" r="12" fill="#0e7c86"/>
-          <circle cx="13" cy="13" r="10.5" stroke="rgba(255,255,255,0.12)" stroke-width="0.75" fill="none"/>
-          <path d="M16 9C16 6 10 6 10 9C10 12 16 14 16 17C16 20 10 20 10 17"
-                stroke="white" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
+        <LogoMark class="footer-mark" size={32} />
         SuretyOS
       </a>
       <p class="footer-tagline">
