@@ -158,15 +158,19 @@ const rotators = [
 
   @media (min-width: 960px) {
     .hero-grid {
-      grid-template-columns: 48% 1fr;
-      gap: var(--sp-12);
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+      gap: var(--sp-16);
     }
   }
+
+  /* Keep copy above the device and never let either column blow out */
+  .hero-copy { position: relative; z-index: 2; min-width: 0; }
+  .hero-visual { min-width: 0; position: relative; z-index: 1; }
 
   /* ── Copy ── */
   .hero-heading {
     font-family: var(--font-display);
-    font-size: clamp(2.25rem, 5vw, 3.875rem);
+    font-size: clamp(2.1rem, 4.4vw, 3.5rem);
     font-weight: 700;
     line-height: 1.08;
     letter-spacing: -0.025em;
@@ -229,7 +233,7 @@ const rotators = [
   .device {
     position: relative;
     width: 100%;
-    max-width: 560px;
+    max-width: 520px;
   }
 
   .laptop { position: relative; }
