@@ -32,14 +32,34 @@ const posts = [
 
 const news = [
   {
-    date: 'Jun 10, 2026',
-    title: 'SuretyOS opens its founding-agency program',
-    dek: 'Limited to the first 25 agencies, with lifetime founder pricing.',
+    date: 'Jun 12, 2026',
+    title: 'Founding-agency applications are open',
+    dek: 'Limited to the first 25 agencies, at lifetime founder pricing.',
+    href: '/#signup',
   },
   {
-    date: 'May 28, 2026',
-    title: 'Florida court bond packets now generating end to end',
-    dek: 'Probate, guardianship, and VA fiduciary, with county cover sheets included.',
+    date: 'Jun 3, 2026',
+    title: "Founder's note: why we're building SuretyOS",
+    dek: 'The surety workflow we kept doing by hand, and the system we wished existed.',
+    href: '/founder',
+  },
+  {
+    date: 'May 27, 2026',
+    title: 'New guide: the four-document bond stack',
+    dek: 'Bond form, power of attorney, indemnity, and court cover sheet, explained.',
+    href: '/blog/four-document-bond-stack',
+  },
+  {
+    date: 'May 14, 2026',
+    title: 'New guide: why bond renewals slip through the cracks',
+    dek: 'The spreadsheet tab that costs agencies clients, and the cadence that prevents it.',
+    href: '/blog/why-bond-renewals-slip',
+  },
+  {
+    date: 'Apr 30, 2026',
+    title: 'New guide: county cover sheets and filing delays',
+    dek: 'How a one-page form bounces an otherwise-complete bond packet.',
+    href: '/blog/county-cover-sheets',
   },
 ];
 ---
@@ -76,13 +96,15 @@ const news = [
       <h3 class="news-title">Latest updates</h3>
       <ul class="news-list" role="list">
         {news.map((n) => (
-          <li class="news-item">
-            <time class="news-date">{n.date}</time>
-            <div class="news-body">
-              <p class="news-headline">{n.title}</p>
-              <p class="news-dek">{n.dek}</p>
-            </div>
-            <span class="news-more" aria-hidden="true">&rarr;</span>
+          <li>
+            <a class="news-item" href={n.href}>
+              <time class="news-date">{n.date}</time>
+              <div class="news-body">
+                <p class="news-headline">{n.title}</p>
+                <p class="news-dek">{n.dek}</p>
+              </div>
+              <span class="news-more" aria-hidden="true">&rarr;</span>
+            </a>
           </li>
         ))}
       </ul>
@@ -223,15 +245,27 @@ const news = [
   }
 
   .news-list { list-style: none; display: flex; flex-direction: column; }
+  .news-list > li { border-bottom: 1px solid var(--filing); }
 
   .news-item {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--sp-1);
-    padding: var(--sp-5) 0;
-    border-bottom: 1px solid var(--filing);
+    padding: var(--sp-5) var(--sp-4);
+    margin: 0 calc(var(--sp-4) * -1);
+    border-radius: var(--radius-md);
     align-items: start;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.18s ease;
   }
+  .news-item:hover { background: var(--filing); }
+  .news-item:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: -2px;
+  }
+  .news-item:hover .news-headline { color: var(--teal); }
+  .news-item:hover .news-more { transform: translateX(3px); }
   @media (min-width: 680px) {
     .news-item {
       grid-template-columns: 130px 1fr auto;
@@ -250,6 +284,7 @@ const news = [
     font-weight: 600;
     color: var(--navy);
     font-size: var(--text-base);
+    transition: color 0.18s ease;
   }
 
   .news-dek {
@@ -262,6 +297,7 @@ const news = [
     color: var(--teal);
     font-size: 1.125rem;
     display: none;
+    transition: transform 0.18s ease;
   }
   @media (min-width: 680px) { .news-more { display: block; } }
 </style>
