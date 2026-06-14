@@ -1,0 +1,156 @@
+---
+import VideoBg from './VideoBg.astro';
+
+// Merged impact numbers (was the separate Stats band + ROI list).
+// Duotone icons: a soft filled shape + a stroked detail, in a circular tile.
+const ICON: Record<string, string> = {
+  clock: `<circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.16"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5V12l3.2 1.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
+  doc: `<path d="M6 3h7l5 5v13H6z" fill="currentColor" opacity="0.16"/><path d="M6 3h7l5 5v13H6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 3v5h5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 13h6M9 16.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
+  bolt: `<path d="M13 2L4 13.5h5.5L9 22l9-11.5h-5.5z" fill="currentColor" opacity="0.16"/><path d="M13 2L4 13.5h5.5L9 22l9-11.5h-5.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>`,
+  calendar: `<rect x="4" y="5" width="16" height="16" rx="2.5" fill="currentColor" opacity="0.16"/><rect x="4" y="5" width="16" height="16" rx="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M4 9.5h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
+  shield: `<path d="M12 3l7 3v5c0 5-3.4 8-7 9-3.6-1-7-4-7-9V6z" fill="currentColor" opacity="0.16"/><path d="M12 3l7 3v5c0 5-3.4 8-7 9-3.6-1-7-4-7-9V6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+  dollar: `<circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.16"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M14.6 9c-.6-1-1.6-1.4-2.6-1.4-1.4 0-2.6.7-2.6 2 0 2.9 5.2 1.3 5.2 4.2 0 1.4-1.2 2.1-2.6 2.1-1.1 0-2.1-.4-2.7-1.5M12 6.4v11.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>`,
+};
+
+const stats = [
+  { icon: 'clock',    to: 30,  prefix: '', suffix: '+', label: 'minutes saved per bond', sub: 'Document prep and re-keying, eliminated' },
+  { icon: 'doc',      to: 4,   prefix: '', suffix: '',  label: 'documents from one intake', sub: 'Bond form, POA, indemnity, court cover sheet' },
+  { icon: 'bolt',     to: 3,   prefix: '', suffix: 's', label: 'to generate a full packet', sub: 'You review and approve the output' },
+  { icon: 'calendar', to: 300, prefix: '', suffix: '+', label: 'hours recovered a year', sub: 'For a 600-bond agency. Eight weeks of work' },
+  { icon: 'shield',   to: 0,   prefix: '', suffix: '',  label: 'missed renewals', sub: 'Alerts at 90, 60, 30, and 15 days out', static: true, display: '0' },
+  { icon: 'dollar',   to: 15,  prefix: '$', suffix: '–35k', label: 'recovered every year', sub: 'In saved time and avoided losses', static: true, display: '$15–35k' },
+];
+---
+
+<section class="section section--navy impact" aria-labelledby="impact-heading">
+  <VideoBg src="/video/bg-team-1.mp4" />
+  <div class="container impact-inner">
+    <div class="impact-header" data-reveal>
+      <h2 id="impact-heading" class="u-headline impact-heading">It pays for itself, on saved time alone.</h2>
+      <p class="impact-sub">The math of a single bond, multiplied across everything your agency writes.</p>
+    </div>
+
+    <dl class="impact-grid">
+      {stats.map((s, i) => (
+        <div class="impact-cell" data-reveal data-delay={String((i % 3) + 1)}>
+          <span class="impact-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" set:html={ICON[s.icon]} />
+          </span>
+          <dt
+            class="impact-figure"
+            data-count-to={s.static ? '' : String(s.to)}
+            data-count-prefix={s.prefix}
+            data-count-suffix={s.suffix}
+          >{s.static ? s.display : `${s.prefix}0${s.suffix}`}</dt>
+          <dd class="impact-label">{s.label}</dd>
+          <dd class="impact-cell-sub">{s.sub}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <div class="impact-cta" data-reveal>
+      <a href="#signup" class="btn btn-primary btn-primary-lg">Book a Demo &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .impact { position: relative; overflow: hidden; }
+  .impact-inner { position: relative; z-index: 1; }
+
+  .impact-header { max-width: 40ch; margin: 0 auto var(--sp-16); text-align: center; }
+  .impact-heading { color: #fff; }
+  .impact-sub {
+    margin-top: var(--sp-4);
+    font-size: var(--text-lg);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.72);
+    text-wrap: pretty;
+  }
+
+  .impact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-12) var(--sp-10);
+  }
+  @media (min-width: 560px) { .impact-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 920px) { .impact-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .impact-cell { text-align: left; }
+
+  .impact-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    color: var(--mint);
+    background: rgba(13, 159, 126, 0.12);
+    box-shadow: inset 0 0 0 1px rgba(13, 159, 126, 0.3);
+    margin-bottom: var(--sp-4);
+  }
+
+  .impact-figure {
+    font-family: var(--font-mono);
+    font-size: clamp(2.5rem, 5vw, 3.25rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--sp-3);
+  }
+
+  .impact-label {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--sp-1);
+  }
+
+  .impact-cell-sub {
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 30ch;
+    text-wrap: pretty;
+  }
+
+  .impact-cta { margin-top: var(--sp-16); text-align: center; }
+</style>
+
+<script>
+  const DURATION = 1300;
+  const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+
+  function run(el: HTMLElement, target: number, prefix: string, suffix: string) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = prefix + target + suffix; return;
+    }
+    const start = performance.now();
+    function step(now: number) {
+      const t = Math.min((now - start) / DURATION, 1);
+      el.textContent = prefix + Math.round(easeOutExpo(t) * target) + suffix;
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target as HTMLElement;
+      const raw = el.dataset.countTo;
+      if (!raw) return;
+      obs.unobserve(el);
+      run(el, parseInt(raw, 10), el.dataset.countPrefix || '', el.dataset.countSuffix || '');
+    });
+  }, { threshold: 0.6 });
+
+  document.querySelectorAll<HTMLElement>('.impact-figure[data-count-to]').forEach((el) => {
+    if (el.dataset.countTo) obs.observe(el);
+  });
+</script>
