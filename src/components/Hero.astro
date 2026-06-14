@@ -1,14 +1,18 @@
 ---
+import VideoBg from './VideoBg.astro';
+
 // Rotating headline phrases — each completes "The operating system for".
+// Kept short so the line never wraps (fixed heading height, no layout shift).
 const rotators = [
-  'surety bond agencies.',
-  'every bond you write.',
-  'probate & court bonds.',
-  'renewals that never slip.',
+  'surety agencies.',
+  'court bonds.',
+  'every renewal.',
+  'your bond book.',
 ];
 ---
 
 <section class="hero section--navy" aria-labelledby="hero-heading">
+  <VideoBg src="/video/bg-hero.mp4" mode="navy" />
   <canvas class="hero-canvas" aria-hidden="true"></canvas>
   <div class="container hero-grid">
 
@@ -127,6 +131,7 @@ const rotators = [
   .hero {
     padding-top: 10.5rem;
     padding-bottom: var(--sp-24);
+    min-height: 92vh;
     display: flex;
     align-items: center;
     position: relative;
@@ -170,7 +175,8 @@ const rotators = [
     text-wrap: balance;
   }
 
-  .rotator { display: inline; }
+  /* Own line + nowrap so the headline height never changes while typing */
+  .rotator { display: block; white-space: nowrap; }
   .rotator-text { color: var(--mint); }
   .rotator-caret {
     display: inline-block;
