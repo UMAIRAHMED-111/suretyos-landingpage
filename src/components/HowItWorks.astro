@@ -27,16 +27,88 @@ const steps = [
       </h2>
     </div>
 
-    <ol class="steps-row" role="list">
-      {steps.map((step, i) => (
-        <li class="step" data-reveal data-delay={String(i + 1)}>
-          <div class="step-number" aria-hidden="true">{step.n}</div>
-          <div class="step-body">
-            <h3 class="u-title step-title">{step.title}</h3>
-            <p class="step-desc">{step.body}</p>
+    <ol class="tour-grid" role="list">
+
+      <!-- 1 · Collect — smart intake form -->
+      <li class="tour-step" data-reveal data-delay="1">
+        <div class="ui-card" aria-hidden="true">
+          <div class="ui-head">
+            <span class="ui-title-sm">New bond intake</span>
+            <span class="ui-pill ui-pill--teal">Smart form</span>
           </div>
-        </li>
-      ))}
+          <div class="ui-form">
+            <div class="ui-field">
+              <span class="ui-label">Bond type</span>
+              <span class="ui-input ui-select">
+                Guardianship — FL Probate
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5l3-3" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </div>
+            <div class="ui-field">
+              <span class="ui-label">Principal</span>
+              <span class="ui-input">John Smith</span>
+            </div>
+            <div class="ui-field">
+              <span class="ui-label">Bond amount</span>
+              <span class="ui-input">$150,000</span>
+            </div>
+            <span class="ui-btn">Send form link &rarr;</span>
+          </div>
+        </div>
+        <div class="tour-text">
+          <h3 class="u-title step-title"><span class="step-chip">{steps[0].n}</span>{steps[0].title}</h3>
+          <p class="step-desc">{steps[0].body}</p>
+        </div>
+      </li>
+
+      <!-- 2 · Generate — documents output -->
+      <li class="tour-step" data-reveal data-delay="2">
+        <div class="ui-card" aria-hidden="true">
+          <div class="ui-head">
+            <span class="ui-title-sm">Documents</span>
+            <span class="ui-pill ui-pill--mint">Generated in 3s</span>
+          </div>
+          <ul class="ui-docs">
+            <li><span class="ui-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Bond form<span class="ui-doc-ext">PDF</span></li>
+            <li><span class="ui-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Power of attorney<span class="ui-doc-ext">PDF</span></li>
+            <li><span class="ui-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Indemnity agreement<span class="ui-doc-ext">PDF</span></li>
+            <li><span class="ui-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Court cover sheet<span class="ui-doc-ext">PDF</span></li>
+          </ul>
+        </div>
+        <div class="tour-text">
+          <h3 class="u-title step-title"><span class="step-chip">{steps[1].n}</span>{steps[1].title}</h3>
+          <p class="step-desc">{steps[1].body}</p>
+        </div>
+      </li>
+
+      <!-- 3 · Track — renewal tracker -->
+      <li class="tour-step" data-reveal data-delay="3">
+        <div class="ui-card" aria-hidden="true">
+          <div class="ui-head">
+            <span class="ui-title-sm">Renewals</span>
+            <span class="ui-pill">Next 90 days</span>
+          </div>
+          <ul class="ui-renewals">
+            <li>
+              <span class="r-main"><span class="r-name">Rivera Logistics LLC</span><span class="r-sub">Court bond · Broward</span></span>
+              <span class="r-badge r-badge--urgent">15 days</span>
+            </li>
+            <li>
+              <span class="r-main"><span class="r-name">Acme Construction</span><span class="r-sub">License bond · Orange</span></span>
+              <span class="r-badge r-badge--soon">30 days</span>
+            </li>
+            <li>
+              <span class="r-main"><span class="r-name">John Smith</span><span class="r-sub">Guardianship · Miami-Dade</span></span>
+              <span class="r-badge">90 days</span>
+            </li>
+          </ul>
+        </div>
+        <div class="tour-text">
+          <h3 class="u-title step-title"><span class="step-chip">{steps[2].n}</span>{steps[2].title}</h3>
+          <p class="step-desc">{steps[2].body}</p>
+        </div>
+      </li>
+
     </ol>
 
   </div>
@@ -52,82 +124,236 @@ const steps = [
     max-width: 30ch;
   }
 
-  /* Step row: horizontal on desktop, vertical on mobile */
-  .steps-row {
+  /* Tour grid: one product panel per step */
+  .tour-grid {
     list-style: none;
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--sp-10);
-    position: relative;
   }
 
-  @media (min-width: 700px) {
-    .steps-row {
+  @media (min-width: 760px) {
+    .tour-grid {
       grid-template-columns: repeat(3, 1fr);
-      gap: var(--sp-8);
-    }
-
-    /* Connecting rule between steps */
-    .steps-row::after {
-      content: '';
-      position: absolute;
-      top: 20px; /* center of 40px circle */
-      left: 40px;  /* right edge of circle 1 */
-      right: calc((100% - 2 * var(--sp-8)) / 3); /* left edge of circle 3 */
-      height: 1px;
-      background: rgba(14, 124, 134, 0.2);
-      pointer-events: none;
-      z-index: 0;
+      gap: var(--sp-6);
+      align-items: start;
     }
   }
 
-  .step {
+  .tour-step {
     display: flex;
-    gap: var(--sp-4);
-    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--sp-5);
   }
 
-  @media (min-width: 700px) {
-    .step {
-      flex-direction: column;
-      gap: var(--sp-4);
-    }
-  }
-
-  .step-number {
-    width: 40px;
-    height: 40px;
+  /* ── Product UI mock card ── */
+  .ui-card {
+    background: #fff;
+    border: 1px solid #e6ebf1;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
     display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 760px) {
+    /* Equal card heights so the step captions below them line up */
+    .ui-card { min-height: 304px; }
+  }
+
+  .tour-step:hover .ui-card {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-3px);
+  }
+
+  .ui-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    padding: 11px var(--sp-4);
+    border-bottom: 1px solid #f1f5f9;
+    background: #f8fafc;
+  }
+
+  .ui-title-sm {
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+
+  .ui-pill {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 100px;
+    color: #64748b;
+    background: #eef2f6;
+    white-space: nowrap;
+  }
+  .ui-pill--teal { color: #0e7c86; background: #d7f0f1; }
+  .ui-pill--mint { color: #0f766e; background: #ccfbf1; }
+
+  /* Body shared padding */
+  .ui-form,
+  .ui-docs,
+  .ui-renewals {
+    padding: var(--sp-4);
+    flex: 1;
+  }
+
+  /* Collect: form */
+  .ui-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
+  .ui-field { display: flex; flex-direction: column; gap: 5px; }
+
+  .ui-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #94a3b8;
+    letter-spacing: 0.02em;
+  }
+
+  .ui-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-2);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #1e293b;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 7px 10px;
+  }
+
+  .ui-btn {
+    margin-top: auto;
+    align-self: flex-start;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--teal);
+    border-radius: 6px;
+    padding: 7px 12px;
+  }
+
+  /* Generate: documents */
+  .ui-docs { list-style: none; display: flex; flex-direction: column; gap: var(--sp-2); justify-content: center; }
+
+  .ui-docs li {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-size: 0.8125rem;
+    color: #374151;
+    background: #f8fafc;
+    border: 1px solid #eef2f6;
+    border-radius: 6px;
+    padding: 8px 10px;
+  }
+
+  .ui-check {
+    width: 15px; height: 15px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--teal); border-radius: 50%; flex-shrink: 0;
+  }
+
+  .ui-doc-ext {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #94a3b8;
+    background: #eef2f6;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+
+  /* Track: renewals */
+  .ui-renewals { list-style: none; display: flex; flex-direction: column; gap: var(--sp-2); justify-content: center; }
+
+  .ui-renewals li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    padding: 9px 10px;
+    border: 1px solid #eef2f6;
+    border-radius: 6px;
+  }
+
+  .r-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+
+  .r-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--navy);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .r-sub {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: #94a3b8;
+  }
+
+  .r-badge {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 100px;
+    color: #64748b;
+    background: #eef2f6;
+    font-variant-numeric: tabular-nums;
+  }
+  /* Urgency scale — semantic, not a second CTA */
+  .r-badge--soon   { color: #b45309; background: #fef3c7; }
+  .r-badge--urgent { color: #b91c1c; background: #fee2e2; }
+
+  /* ── Step caption ── */
+  .step-title {
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-2);
+  }
+
+  .step-chip {
+    width: 26px;
+    height: 26px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     background: var(--teal);
-    color: white;
+    color: #fff;
     border-radius: 50%;
     font-family: var(--font-mono);
-    font-size: 0.9375rem;
+    font-size: 0.8125rem;
     font-weight: 600;
     flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-    box-shadow: 0 0 0 5px rgba(14, 124, 134, 0.12), 0 0 0 10px rgba(14, 124, 134, 0.05);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-  }
-
-  .step:hover .step-number {
-    box-shadow: 0 0 0 6px rgba(14, 124, 134, 0.18), 0 0 0 12px rgba(14, 124, 134, 0.07);
-    transform: scale(1.08);
-  }
-
-  .step-title {
-    color: var(--navy);
-    margin-bottom: var(--sp-2);
   }
 
   .step-desc {
     font-size: var(--text-base);
-    line-height: 1.65;
+    line-height: 1.6;
     color: var(--ink-secondary);
-    max-width: 32ch;
     text-wrap: pretty;
   }
 </style>

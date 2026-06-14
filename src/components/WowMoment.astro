@@ -1,4 +1,17 @@
 ---
+const fields = [
+  { key: 'Principal',   value: 'John Smith' },
+  { key: 'Bond type',   value: 'Guardianship — FL Probate' },
+  { key: 'Bond amount', value: '$150,000' },
+  { key: 'County',      value: 'Miami-Dade' },
+];
+
+const docs = [
+  'Bond form',
+  'Power of attorney',
+  'Indemnity agreement',
+  'Court cover sheet',
+];
 ---
 
 <section class="section section--navy wow-section" aria-labelledby="wow-heading">
@@ -14,36 +27,32 @@
         SuretyOS handles the work you do by hand today: reading the application,
         typing each field into each form. You review and approve the output.
       </p>
+      <p class="wow-note" aria-hidden="true">A look at the product, running on a sample bond.</p>
     </div>
 
-    <!-- Demo placeholder — animated to hint at the transformation -->
-    <div class="demo-card" aria-label="Product demo coming soon" data-reveal data-delay="2">
+    <!-- Looping product demo -->
+    <div class="demo-card" data-demo aria-label="Animated demo: a bond intake generating four documents" data-reveal data-delay="2">
       <div class="demo-header">
         <div class="demo-dots" aria-hidden="true">
           <span></span><span></span><span></span>
         </div>
         <span class="demo-label">SuretyOS &mdash; Generate Documents</span>
+        <span class="demo-status" data-status data-state="idle">Awaiting intake</span>
       </div>
 
       <div class="demo-body">
         <div class="demo-intake">
           <p class="demo-section-label">Intake submission</p>
-          <div class="demo-field">
-            <span class="field-key">Principal</span>
-            <span class="field-val">John Smith</span>
-          </div>
-          <div class="demo-field">
-            <span class="field-key">Bond type</span>
-            <span class="field-val">Guardianship — FL Probate</span>
-          </div>
-          <div class="demo-field">
-            <span class="field-key">Bond amount</span>
-            <span class="field-val">$150,000</span>
-          </div>
-          <div class="demo-field">
-            <span class="field-key">County</span>
-            <span class="field-val">Miami-Dade</span>
-          </div>
+          {fields.map((f) => (
+            <div class="demo-field">
+              <span class="field-key">{f.key}</span>
+              <span class="field-val" data-val={f.value}></span>
+            </div>
+          ))}
+          <button class="demo-generate" data-generate type="button" tabindex="-1" aria-hidden="true">
+            <span class="gen-spinner" aria-hidden="true"></span>
+            <span class="gen-label">Generate documents</span>
+          </button>
         </div>
 
         <div class="demo-arrow" aria-hidden="true">
@@ -54,42 +63,17 @@
 
         <div class="demo-output">
           <p class="demo-section-label">Generated</p>
-          <div class="demo-doc doc-animated" style="--delay: 0ms">
-            <span class="doc-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 2h7l3 3v7a1 1 0 01-1 1H2a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
-                <path d="M9 2v3h3" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            Bond form
-          </div>
-          <div class="demo-doc doc-animated" style="--delay: 200ms">
-            <span class="doc-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 2h7l3 3v7a1 1 0 01-1 1H2a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
-                <path d="M9 2v3h3" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            Power of attorney
-          </div>
-          <div class="demo-doc doc-animated" style="--delay: 400ms">
-            <span class="doc-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 2h7l3 3v7a1 1 0 01-1 1H2a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
-                <path d="M9 2v3h3" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            Indemnity agreement
-          </div>
-          <div class="demo-doc doc-animated" style="--delay: 600ms">
-            <span class="doc-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 2h7l3 3v7a1 1 0 01-1 1H2a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
-                <path d="M9 2v3h3" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            Court cover sheet
-          </div>
+          <span class="demo-scan" data-scan aria-hidden="true"></span>
+          {docs.map((d) => (
+            <div class="demo-doc" data-doc>
+              <span class="doc-check" aria-hidden="true">
+                <svg width="9" height="7" viewBox="0 0 10 8" fill="none">
+                  <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="doc-name">{d}</span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -99,9 +83,9 @@
             <circle cx="6" cy="6" r="5" stroke="var(--mint)" stroke-width="1.2"/>
             <path d="M6 3.5v2.8l1.8 1.2" stroke="var(--mint)" stroke-width="1.2" stroke-linecap="round"/>
           </svg>
-          3.1 seconds
+          <span data-timer>0.0 seconds</span>
         </span>
-        <span class="demo-count">4 documents ready</span>
+        <span class="demo-count" data-count>0 documents ready</span>
       </div>
     </div>
 
@@ -185,6 +169,14 @@
     text-wrap: pretty;
   }
 
+  .wow-note {
+    margin-top: var(--sp-5);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.01em;
+  }
+
   /* ── Demo card — light mode application window ── */
   .demo-card {
     background: #ffffff;
@@ -227,7 +219,31 @@
     font-size: var(--text-xs);
     color: #94a3b8;
     letter-spacing: 0;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+
+  /* Keep the window title bar to a single line on narrow phones */
+  @media (max-width: 430px) {
+    .demo-label { display: none; }
+    .demo-header { justify-content: space-between; }
+  }
+
+  /* Status pill — reflects the current phase */
+  .demo-status {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 100px;
+    white-space: nowrap;
+    transition: color 0.25s ease, background 0.25s ease;
+  }
+  .demo-status[data-state="idle"]    { color: #94a3b8; background: #eef2f6; }
+  .demo-status[data-state="working"] { color: #b45309; background: #fef3c7; }
+  .demo-status[data-state="done"]    { color: #0f766e; background: #ccfbf1; }
 
   .demo-body {
     display: grid;
@@ -236,20 +252,23 @@
     align-items: stretch;
   }
 
-  @media (max-width: 500px) {
-    .demo-body {
-      grid-template-columns: 1fr;
-    }
+  @media (max-width: 540px) {
+    .demo-body { grid-template-columns: 1fr; }
     .demo-arrow { display: none; }
+    .demo-intake { border-right: none !important; border-bottom: 1px solid #e2e8f0; }
   }
 
   .demo-intake {
     padding: var(--sp-5) var(--sp-6);
     border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
   }
 
   .demo-output {
     padding: var(--sp-5) var(--sp-6);
+    position: relative;
+    overflow: hidden;
   }
 
   .demo-section-label {
@@ -268,33 +287,84 @@
     padding: var(--sp-2) 0;
     border-bottom: 1px solid #f1f5f9;
     font-size: 0.8125rem;
+    min-height: 33px;
+    align-items: center;
   }
-
-  .demo-field:last-child { border-bottom: none; }
 
   .field-key {
     font-family: var(--font-mono);
     color: #94a3b8;
     min-width: 88px;
     flex-shrink: 0;
-    padding-top: 1px;
   }
 
   .field-val {
     font-family: var(--font-mono);
     color: #1e293b;
     font-weight: 500;
+    min-height: 1em;
   }
 
-  .demo-arrow {
-    display: flex;
+  /* Blinking caret while a field is being typed */
+  .field-val.is-typing::after {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 1.05em;
+    margin-left: 1px;
+    background: var(--teal);
+    transform: translateY(2px);
+    animation: caret-blink 0.9s steps(1) infinite;
+  }
+
+  @keyframes caret-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  /* Generate button */
+  .demo-generate {
+    margin-top: var(--sp-4);
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 var(--sp-4);
-    flex-shrink: 0;
+    gap: var(--sp-2);
+    align-self: flex-start;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--teal);
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 0.9rem;
+    cursor: default;
+    opacity: 0.45;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, box-shadow 0.25s ease, transform 0.12s ease, background 0.25s ease;
   }
+  /* armed: intake complete, ready to fire */
+  .demo-generate.is-armed {
+    opacity: 1;
+    box-shadow: 0 0 0 4px rgba(14, 124, 134, 0.16);
+  }
+  .demo-generate.is-pressed { transform: scale(0.96); }
+  .demo-generate.is-working { background: var(--teal-hover); box-shadow: none; }
 
-  /* Generated doc rows */
+  .gen-spinner {
+    width: 12px; height: 12px;
+    border: 1.6px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    display: none;
+  }
+  .demo-generate.is-working .gen-spinner {
+    display: block;
+    animation: gen-spin 0.6s linear infinite;
+  }
+  @keyframes gen-spin { to { transform: rotate(360deg); } }
+
+  /* Generated docs */
   .demo-doc {
     display: flex;
     align-items: center;
@@ -307,22 +377,43 @@
     color: #374151;
     margin-bottom: var(--sp-2);
     opacity: 0;
-    animation: docAppear 0.4s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0ms) forwards;
-    animation-play-state: paused;
+    transform: translateX(10px);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
-
   .demo-doc:last-child { margin-bottom: 0; }
+  .demo-doc.is-shown { opacity: 1; transform: translateX(0); }
 
-  .demo-card.is-visible .demo-doc {
-    animation-play-state: running;
+  .doc-check {
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--teal);
+    border-radius: 50%;
+    flex-shrink: 0;
   }
 
-  @keyframes docAppear {
-    from { opacity: 0; transform: translateX(8px); }
-    to   { opacity: 1; transform: translateX(0); }
+  /* Sweep line during generation */
+  .demo-scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--teal), transparent);
+    opacity: 0;
+    pointer-events: none;
   }
-
-  .doc-icon { color: var(--teal); flex-shrink: 0; display: flex; }
+  .demo-scan.is-scanning {
+    animation: scan-sweep 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  @keyframes scan-sweep {
+    0%   { opacity: 0; transform: translateY(34px); }
+    15%  { opacity: 0.9; }
+    85%  { opacity: 0.9; }
+    100% { opacity: 0; transform: translateY(100%); }
+  }
 
   .demo-footer {
     display: flex;
@@ -341,32 +432,164 @@
     font-size: var(--text-xs);
     color: var(--teal);
     font-weight: 600;
+    font-variant-numeric: tabular-nums;
   }
 
   .demo-count {
     font-size: var(--text-xs);
     color: #94a3b8;
     font-family: var(--font-body);
+    font-variant-numeric: tabular-nums;
   }
 
+  /* Reduced motion: no spinner spin / caret blink (handled in JS by showing final state) */
   @media (prefers-reduced-motion: reduce) {
-    .demo-doc { animation: none; opacity: 1; transform: none; }
+    .field-val.is-typing::after { animation: none; }
+    .gen-spinner { animation: none; }
+    .demo-doc { transition: none; }
   }
 </style>
 
 <script>
-  // Trigger doc animations when the card enters the viewport
-  const card = document.querySelector<HTMLElement>('.demo-card');
-  if (card) {
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          card.classList.add('is-visible');
-          obs.disconnect();
+  type DemoState = 'idle' | 'working' | 'done';
+
+  function initDemo(card: HTMLElement) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const statusEl = card.querySelector<HTMLElement>('[data-status]')!;
+    const vals = Array.from(card.querySelectorAll<HTMLElement>('.field-val'));
+    const genBtn = card.querySelector<HTMLElement>('[data-generate]')!;
+    const scan = card.querySelector<HTMLElement>('[data-scan]')!;
+    const docRows = Array.from(card.querySelectorAll<HTMLElement>('[data-doc]'));
+    const timerEl = card.querySelector<HTMLElement>('[data-timer]')!;
+    const countEl = card.querySelector<HTMLElement>('[data-count]')!;
+
+    const STATUS: Record<DemoState, string> = {
+      idle: 'Awaiting intake',
+      working: 'Generating…',
+      done: 'Complete',
+    };
+    const setStatus = (s: DemoState) => {
+      statusEl.dataset.state = s;
+      statusEl.textContent = STATUS[s];
+    };
+
+    // Final, static state — used for reduced motion and as the "done" frame.
+    function showComplete() {
+      vals.forEach((el) => { el.textContent = el.dataset.val || ''; el.classList.remove('is-typing'); });
+      genBtn.classList.remove('is-armed', 'is-pressed', 'is-working');
+      genBtn.querySelector('.gen-label')!.textContent = 'Generate documents';
+      docRows.forEach((d) => d.classList.add('is-shown'));
+      timerEl.textContent = '3.1 seconds';
+      countEl.textContent = `${docRows.length} documents ready`;
+      setStatus('done');
+    }
+
+    if (reduce) { showComplete(); return; }
+
+    let token = 0;
+
+    const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+    const alive = (t: number) => t === token;
+
+    function reset() {
+      vals.forEach((el) => { el.textContent = ''; el.classList.remove('is-typing'); });
+      genBtn.classList.remove('is-armed', 'is-pressed', 'is-working');
+      genBtn.querySelector('.gen-label')!.textContent = 'Generate documents';
+      scan.classList.remove('is-scanning');
+      docRows.forEach((d) => d.classList.remove('is-shown'));
+      timerEl.textContent = '0.0 seconds';
+      countEl.textContent = '0 documents ready';
+      setStatus('idle');
+    }
+
+    async function typeField(el: HTMLElement, text: string, t: number) {
+      el.classList.add('is-typing');
+      for (let i = 0; i <= text.length; i++) {
+        if (!alive(t)) return;
+        el.textContent = text.slice(0, i);
+        await sleep(18 + Math.random() * 26);
+      }
+      el.classList.remove('is-typing');
+    }
+
+    function runTimer(to: number, dur: number, t: number) {
+      return new Promise<void>((resolve) => {
+        const start = performance.now();
+        function step(now: number) {
+          if (!alive(t)) return resolve();
+          const p = Math.min((now - start) / dur, 1);
+          timerEl.textContent = (p * to).toFixed(1) + ' seconds';
+          if (p < 1) requestAnimationFrame(step);
+          else resolve();
         }
-      },
-      { threshold: 0.3 }
+        requestAnimationFrame(step);
+      });
+    }
+
+    async function play(t: number) {
+      while (alive(t)) {
+        reset();
+        await sleep(700); if (!alive(t)) return;
+
+        // 1. Type each intake field
+        for (const el of vals) {
+          await typeField(el, el.dataset.val || '', t);
+          if (!alive(t)) return;
+          await sleep(160);
+        }
+
+        // 2. Arm + "click" the generate button
+        await sleep(360); if (!alive(t)) return;
+        genBtn.classList.add('is-armed');
+        await sleep(520); if (!alive(t)) return;
+        genBtn.classList.add('is-pressed');
+        await sleep(130);
+        genBtn.classList.remove('is-pressed');
+        genBtn.classList.add('is-working');
+        genBtn.querySelector('.gen-label')!.textContent = 'Generating…';
+        setStatus('working');
+
+        // 3. Scan sweep + timer + docs cascade in
+        scan.classList.remove('is-scanning');
+        void scan.offsetWidth; // restart animation
+        scan.classList.add('is-scanning');
+        runTimer(3.1, 1300, t);
+
+        for (let i = 0; i < docRows.length; i++) {
+          await sleep(i === 0 ? 360 : 240);
+          if (!alive(t)) return;
+          docRows[i].classList.add('is-shown');
+          countEl.textContent = `${i + 1} document${i === 0 ? '' : 's'} ready`;
+        }
+
+        // 4. Settle on the complete state
+        await sleep(360); if (!alive(t)) return;
+        genBtn.classList.remove('is-working');
+        genBtn.querySelector('.gen-label')!.textContent = 'Generate documents';
+        timerEl.textContent = '3.1 seconds';
+        setStatus('done');
+
+        // 5. Hold, then loop
+        await sleep(3200); if (!alive(t)) return;
+      }
+    }
+
+    const startLoop = () => { token++; play(token); };
+    const stopLoop = () => { token++; };
+
+    const io = new IntersectionObserver(
+      ([entry]) => { entry.isIntersecting ? startLoop() : stopLoop(); },
+      { threshold: 0.35 }
     );
-    obs.observe(card);
+    io.observe(card);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopLoop();
+      else if (card.getBoundingClientRect().top < window.innerHeight && card.getBoundingClientRect().bottom > 0) startLoop();
+    });
   }
+
+  const card = document.querySelector<HTMLElement>('.demo-card[data-demo]');
+  if (card) initDemo(card);
 </script>
