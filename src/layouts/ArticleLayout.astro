@@ -1,0 +1,229 @@
+---
+import Footer from '../components/Footer.astro';
+import LogoMark from '../components/LogoMark.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  dek: string;
+  category: string;
+  date: string;
+  readTime: string;
+  image?: string;
+  imageAlt?: string;
+}
+const { title, dek, category, date, readTime, image, imageAlt } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} — SuretyOS</title>
+  <meta name="description" content={dek} />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0e2744" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={dek} />
+</head>
+<body>
+  <header class="article-nav">
+    <div class="container article-nav-inner">
+      <a href="/" class="article-logo" aria-label="SuretyOS home">
+        <LogoMark size={32} />
+        SuretyOS
+      </a>
+      <a href="/#insights-heading" class="article-back">&larr; All insights</a>
+    </div>
+  </header>
+
+  <main class="article-main">
+    <article class="container article-inner">
+      <span class="article-cat">{category}</span>
+      <h1 class="u-headline article-title">{title}</h1>
+      <p class="article-dek">{dek}</p>
+      <p class="article-meta"><time>{date}</time> · {readTime}</p>
+
+      {image && (
+        <figure class="article-hero">
+          <img src={image} alt={imageAlt} loading="eager" />
+        </figure>
+      )}
+
+      <div class="article-prose">
+        <slot />
+      </div>
+
+      <aside class="article-cta">
+        <p class="article-cta-text">
+          SuretyOS turns the workflow in this article into one intake and one click.
+        </p>
+        <a href="/#signup" class="btn btn-primary">Book a Demo &rarr;</a>
+      </aside>
+    </article>
+  </main>
+
+  <Footer />
+
+  <style>
+    .article-nav {
+      background: var(--navy);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .article-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .article-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      color: white;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 1.0625rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+    .article-back {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .article-back:hover { color: white; }
+    .article-logo:focus-visible,
+    .article-back:focus-visible {
+      outline: 2px solid var(--mint);
+      outline-offset: 4px;
+      border-radius: var(--radius-sm);
+    }
+
+    .article-main {
+      padding: var(--sp-16) 0 var(--sp-24);
+      background: var(--white);
+    }
+    .article-inner { max-width: 700px; }
+
+    .article-cat {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: rgba(14, 124, 134, 0.09);
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: var(--sp-5);
+    }
+    .article-title { color: var(--navy); margin-bottom: var(--sp-4); }
+    .article-dek {
+      font-size: var(--text-lg);
+      line-height: 1.55;
+      color: var(--ink-secondary);
+      margin-bottom: var(--sp-5);
+      text-wrap: pretty;
+    }
+    .article-meta {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--ink-tertiary);
+      padding-bottom: var(--sp-8);
+      margin-bottom: var(--sp-8);
+      border-bottom: 1px solid var(--filing);
+    }
+
+    .article-hero {
+      margin: 0 0 var(--sp-8);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 16 / 8;
+      background: var(--filing);
+    }
+    .article-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .article-prose :global(h2) {
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      margin: var(--sp-10) 0 var(--sp-3);
+    }
+    .article-prose :global(h3) {
+      font-family: var(--font-display);
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: var(--sp-6) 0 var(--sp-2);
+    }
+    .article-prose :global(p) {
+      font-size: var(--text-base);
+      line-height: 1.75;
+      color: var(--ink-secondary);
+      margin-bottom: var(--sp-4);
+      text-wrap: pretty;
+    }
+    .article-prose :global(ul),
+    .article-prose :global(ol) {
+      margin: 0 0 var(--sp-4) var(--sp-5);
+      padding: 0;
+    }
+    .article-prose :global(li) {
+      font-size: var(--text-base);
+      line-height: 1.7;
+      color: var(--ink-secondary);
+      margin-bottom: var(--sp-2);
+    }
+    .article-prose :global(strong) { color: var(--ink); font-weight: 600; }
+    .article-prose :global(a) {
+      color: var(--teal);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .article-prose :global(blockquote) {
+      margin: var(--sp-6) 0;
+      padding: var(--sp-5) var(--sp-6);
+      background: var(--filing);
+      border-radius: var(--radius-md);
+      color: var(--ink);
+      font-size: 1.125rem;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .article-cta {
+      margin-top: var(--sp-12);
+      padding: var(--sp-8);
+      background: var(--filing);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--sp-4);
+    }
+    .article-cta-text {
+      font-family: var(--font-display);
+      font-size: var(--text-title);
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      max-width: 36ch;
+    }
+  </style>
+</body>
+</html>

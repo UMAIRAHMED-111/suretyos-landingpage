@@ -230,6 +230,10 @@ button { font-family: inherit; }
 .section--white { background: var(--white); color: var(--ink); }
 .section--filing{ background: var(--filing); color: var(--ink); }
 
+/* Offset anchor jumps so headings clear the fixed announcement bar + nav */
+:where(section, h2, h3)[id] { scroll-margin-top: 6.5rem; }
+#signup { scroll-margin-top: 5rem; }
+
 /* ─── Scroll reveal ─────────────────────────────────────────────── */
 /* Default: visible (no-JS, crawlers, headless renderers, reduced-motion). */
 /* .js class on <html> (added by script) enables the hidden-until-revealed state. */

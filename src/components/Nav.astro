@@ -1,30 +1,102 @@
 ---
 import LogoMark from "./LogoMark.astro";
+
+const links = [
+  { label: 'How it works', href: '#how-heading' },
+  { label: 'Why SuretyOS', href: '#why-heading' },
+  { label: 'Coverage', href: '#coverage-heading' },
+  { label: 'Insights', href: '#insights-heading' },
+  { label: 'FAQ', href: '#faq-heading' },
+];
 ---
 
-<header class="site-nav" role="banner">
-  <div class="container nav-inner">
-    <a href="/" class="nav-logo" aria-label="SuretyOS home">
-      <LogoMark class="logo-mark" size={36} />
-      SuretyOS
-    </a>
+<div class="nav-shell" data-nav role="banner">
+  <a href="#signup" class="announce-bar">
+    <span class="announce-text">
+      <strong>Now onboarding founding agencies</strong> · lifetime founder pricing for the first 25
+    </span>
+    <span class="announce-cta">Book a Demo&nbsp;&rarr;</span>
+  </a>
 
-    <a href="#signup" class="btn btn-primary nav-cta">
-      Join the Program
-    </a>
-  </div>
-</header>
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo" aria-label="SuretyOS home">
+        <LogoMark class="logo-mark" size={36} />
+        SuretyOS
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        {links.map((l) => (
+          <a href={l.href} class="nav-link">{l.label}</a>
+        ))}
+      </nav>
+
+      <a href="#signup" class="btn btn-primary nav-cta">Book a Demo</a>
+
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-toggle>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="nav-menu" data-menu>
+      <nav class="nav-menu-inner" aria-label="Mobile">
+        {links.map((l) => (
+          <a href={l.href} class="nav-menu-link" data-menu-link>{l.label}</a>
+        ))}
+        <a href="#signup" class="btn btn-primary nav-menu-cta" data-menu-link>Book a Demo</a>
+      </nav>
+    </div>
+  </header>
+</div>
 
 <style>
-  .site-nav {
+  .nav-shell {
     position: fixed;
     inset: 0 0 auto;
     z-index: var(--z-sticky);
-    /* starts transparent — hero is navy so it looks seamless */
+  }
+
+  /* ── Announcement bar ── */
+  .announce-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-3);
+    min-height: 40px;
+    padding: 8px var(--sp-6);
+    background: var(--teal);
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.8125rem;
+    line-height: 1.3;
+    text-align: center;
+    transition: background 0.15s ease;
+  }
+  .announce-bar:hover { background: var(--teal-hover); }
+  .announce-bar:focus-visible { outline: 2px solid var(--mint); outline-offset: -3px; }
+  .announce-text { font-weight: 500; color: rgba(255, 255, 255, 0.92); }
+  .announce-text strong { font-weight: 700; color: #fff; }
+  .announce-cta {
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 1px;
+  }
+
+  @media (max-width: 680px) {
+    .announce-text { display: none; }
+    .announce-cta::before {
+      content: 'Now onboarding founding agencies · ';
+      font-weight: 500;
+      border: none;
+    }
+  }
+
+  /* ── Nav row ── */
+  .site-nav {
     background: transparent;
     transition: background 0.25s ease, box-shadow 0.25s ease;
   }
-
   .site-nav.is-scrolled {
     background: var(--navy);
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -33,7 +105,7 @@ import LogoMark from "./LogoMark.astro";
   .nav-inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: var(--sp-6);
     height: 64px;
   }
 
@@ -48,28 +120,133 @@ import LogoMark from "./LogoMark.astro";
     font-weight: 700;
     letter-spacing: -0.015em;
     line-height: 1;
+    margin-right: auto;
   }
-
   .nav-logo:focus-visible {
     outline: 2px solid var(--mint);
     outline-offset: 4px;
     border-radius: var(--radius-sm);
   }
+  .logo-mark { flex-shrink: 0; }
 
-  .logo-mark {
-    flex-shrink: 0;
+  /* ── Desktop links ── */
+  .nav-links {
+    display: none;
+    align-items: center;
+    gap: var(--sp-6);
   }
+  .nav-link {
+    color: rgba(255, 255, 255, 0.82);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    position: relative;
+    padding: 4px 0;
+    transition: color 0.15s ease;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 2px;
+    background: var(--mint);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+  .nav-link:hover { color: #fff; }
+  .nav-link:hover::after { transform: scaleX(1); }
+  .nav-link:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; border-radius: 2px; }
 
   .nav-cta {
-    /* min 44px tall for comfortable thumb tapping */
+    display: none;
     padding: 0.6875rem 1.125rem;
     font-size: 0.9375rem;
   }
 
-  @media (max-width: 400px) {
-    .nav-cta {
-      padding: 0.6875rem 1rem;
-      font-size: 0.875rem;
-    }
+  @media (min-width: 900px) {
+    .nav-links { display: flex; }
+    .nav-cta { display: inline-flex; }
+  }
+
+  /* ── Mobile toggle ── */
+  .nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .nav-toggle:focus-visible { outline: 2px solid var(--mint); outline-offset: 2px; border-radius: var(--radius-sm); }
+
+  .nav-shell.is-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-shell.is-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  .nav-shell.is-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (min-width: 900px) {
+    .nav-toggle { display: none; }
+  }
+
+  /* ── Mobile menu ── */
+  .nav-menu {
+    overflow: hidden;
+    max-height: 0;
+    background: var(--navy);
+    transition: max-height 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-shell.is-open .nav-menu {
+    max-height: 380px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  /* When open and not scrolled, the nav row needs a backdrop too */
+  .nav-shell.is-open .site-nav { background: var(--navy); }
+
+  .nav-menu-inner {
+    display: flex;
+    flex-direction: column;
+    padding: var(--sp-4) var(--sp-6) var(--sp-6);
+    gap: var(--sp-1);
+  }
+  .nav-menu-link {
+    color: rgba(255, 255, 255, 0.88);
+    text-decoration: none;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .nav-menu-link:last-of-type { border-bottom: none; }
+  .nav-menu-cta { margin-top: var(--sp-4); width: 100%; }
+
+  @media (min-width: 900px) {
+    .nav-menu { display: none; }
   }
 </style>
+
+<script>
+  const shell = document.querySelector<HTMLElement>('[data-nav]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-toggle]');
+  if (shell && toggle) {
+    const close = () => { shell.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); };
+    toggle.addEventListener('click', () => {
+      const open = shell.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    shell.querySelectorAll('[data-menu-link]').forEach((a) => a.addEventListener('click', close));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+  }
+</script>

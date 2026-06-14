@@ -1,4 +1,11 @@
 ---
+// Rotating headline phrases — each completes "The operating system for".
+const rotators = [
+  'surety bond agencies.',
+  'every bond you write.',
+  'probate & court bonds.',
+  'renewals that never slip.',
+];
 ---
 
 <section class="hero section--navy" aria-labelledby="hero-heading">
@@ -7,114 +14,110 @@
 
     <!-- Left: copy + CTA -->
     <div class="hero-copy">
-      <h1 id="hero-heading" class="u-display hero-heading" data-reveal>
-        The operating system for surety bond agencies.
+      <h1 id="hero-heading" class="hero-heading">
+        The operating system for
+        <span class="rotator" aria-hidden="true">
+          <span class="rotator-text" data-rotator data-phrases={JSON.stringify(rotators)}>surety bond agencies.</span><span class="rotator-caret"></span>
+        </span>
+        <span class="sr-only">surety bond agencies.</span>
       </h1>
 
-      <p class="hero-sub" data-reveal data-delay="1">
+      <p class="hero-sub">
         One intake form populates every required document automatically.
         Renewal tracking built in for the life of every bond.
       </p>
 
-      <div class="hero-actions" data-reveal data-delay="2">
+      <div class="hero-actions">
         <a href="#signup" class="btn btn-primary btn-primary-lg">
-          Join the Founding Program &rarr;
+          Book a Demo &rarr;
         </a>
         <p class="hero-caveat">
-          Limited to the first 25 agencies. Lifetime founder pricing.
+          A 20-minute walkthrough on your own bond types.
         </p>
       </div>
     </div>
 
-    <!-- Right: before/after visual comparison -->
-    <div class="hero-visual" aria-hidden="true" data-reveal data-delay="2">
+    <!-- Right: laptop device with a slideshow of product screens -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="device">
+        <div class="laptop">
+          <div class="laptop-screen">
+            <div class="screens" data-slides>
 
-      <!-- Before: manual chaos -->
-      <div class="before-panel">
-        <div class="panel-header">
-          <p class="panel-label">Without SuretyOS</p>
-          <span class="time-badge">~45 min/bond</span>
-        </div>
-        <ul class="file-list">
-          <li class="file-row">
-            <span class="file-ext docx">DOC</span>
-            <span class="file-name">Bond_v3_FINAL_2.docx</span>
-          </li>
-          <li class="file-row">
-            <span class="file-ext docx">DOC</span>
-            <span class="file-name">POA_template_edit.docx</span>
-          </li>
-          <li class="file-row">
-            <span class="file-ext xlsx">XLS</span>
-            <span class="file-name">Renewals_2024.xlsx</span>
-          </li>
-          <li class="file-row">
-            <span class="file-ext email">MSG</span>
-            <span class="file-name">Re: Re: Re: Bond Request</span>
-          </li>
-        </ul>
-        <p class="before-note">Same client data. Entered into each one by hand.</p>
-      </div>
+              <!-- Screen 1 — Documents generated -->
+              <article class="screen is-active" data-slide>
+                <header class="scr-head">
+                  <span class="scr-app">SuretyOS</span>
+                  <span class="scr-tab">Guardianship Bond · John Smith</span>
+                  <span class="scr-pill scr-pill--mint">Generated in 3s</span>
+                </header>
+                <div class="scr-body">
+                  <p class="scr-label">Documents</p>
+                  <ul class="scr-docs">
+                    <li><span class="scr-check"></span>Bond form<span class="scr-ext">PDF</span></li>
+                    <li><span class="scr-check"></span>Power of attorney<span class="scr-ext">PDF</span></li>
+                    <li><span class="scr-check"></span>Indemnity agreement<span class="scr-ext">PDF</span></li>
+                    <li><span class="scr-check"></span>Court cover sheet<span class="scr-ext">PDF</span></li>
+                  </ul>
+                </div>
+              </article>
 
-      <!-- Arrow connector -->
-      <div class="transform-arrow" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M5 12h14M13 6l6 6-6 6" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
+              <!-- Screen 2 — Renewals dashboard -->
+              <article class="screen" data-slide>
+                <header class="scr-head">
+                  <span class="scr-app">SuretyOS</span>
+                  <span class="scr-tab">Renewals · Next 90 days</span>
+                  <span class="scr-pill">12 due</span>
+                </header>
+                <div class="scr-body">
+                  <p class="scr-label">Upcoming renewals</p>
+                  <ul class="scr-rows">
+                    <li><span class="rw-main"><span class="rw-name">Rivera Logistics LLC</span><span class="rw-sub">Court bond · Broward</span></span><span class="rw-badge rw-urgent">15 days</span></li>
+                    <li><span class="rw-main"><span class="rw-name">Acme Construction</span><span class="rw-sub">License bond · Orange</span></span><span class="rw-badge rw-soon">30 days</span></li>
+                    <li><span class="rw-main"><span class="rw-name">John Smith</span><span class="rw-sub">Guardianship · Miami-Dade</span></span><span class="rw-badge">90 days</span></li>
+                  </ul>
+                </div>
+              </article>
 
-      <!-- After: SuretyOS app window -->
-      <div class="after-panel">
-        <!-- macOS window chrome -->
-        <div class="app-chrome">
-          <div class="app-dots">
-            <span></span><span></span><span></span>
+              <!-- Screen 3 — Bond repository -->
+              <article class="screen" data-slide>
+                <header class="scr-head">
+                  <span class="scr-app">SuretyOS</span>
+                  <span class="scr-tab">Bonds</span>
+                  <span class="scr-pill scr-pill--teal">1,284 active</span>
+                </header>
+                <div class="scr-body">
+                  <p class="scr-label">Bond repository</p>
+                  <table class="scr-table">
+                    <thead><tr><th>Client</th><th>Type</th><th>County</th><th>Status</th></tr></thead>
+                    <tbody>
+                      <tr><td>John Smith</td><td>Guardianship</td><td>Miami-Dade</td><td><span class="st st-ok">Active</span></td></tr>
+                      <tr><td>Acme Construction</td><td>License</td><td>Orange</td><td><span class="st st-ok">Active</span></td></tr>
+                      <tr><td>Rivera Logistics</td><td>Court</td><td>Broward</td><td><span class="st st-due">Renew</span></td></tr>
+                      <tr><td>Delgado Estate</td><td>Probate</td><td>Hillsborough</td><td><span class="st st-ok">Active</span></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+
+            </div>
           </div>
-          <span class="app-name">SuretyOS</span>
-          <span class="app-badge">Generated in 3s</span>
+          <div class="laptop-foot"></div>
         </div>
-        <!-- Record header -->
-        <div class="app-record">
-          <p class="record-title">Guardianship Bond — John Smith</p>
-          <p class="record-meta">Miami-Dade County · $150,000</p>
-        </div>
-        <!-- Generated documents -->
-        <ul class="doc-list">
-          <li class="doc-row">
-            <span class="doc-check" aria-hidden="true">
-              <svg width="9" height="7" viewBox="0 0 10 8" fill="none">
-                <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            Bond form
-          </li>
-          <li class="doc-row">
-            <span class="doc-check" aria-hidden="true">
-              <svg width="9" height="7" viewBox="0 0 10 8" fill="none">
-                <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            Power of attorney
-          </li>
-          <li class="doc-row">
-            <span class="doc-check" aria-hidden="true">
-              <svg width="9" height="7" viewBox="0 0 10 8" fill="none">
-                <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            Indemnity agreement
-          </li>
-          <li class="doc-row">
-            <span class="doc-check" aria-hidden="true">
-              <svg width="9" height="7" viewBox="0 0 10 8" fill="none">
-                <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            Court cover sheet
-          </li>
-        </ul>
-      </div>
 
+        <!-- Floating stat card overlapping the laptop -->
+        <div class="float-card">
+          <span class="fc-figure">30<span class="fc-unit">min</span></span>
+          <span class="fc-label">saved per bond</span>
+        </div>
+
+        <!-- Slideshow indicators -->
+        <div class="device-dots" data-dots>
+          <button class="dot is-active" type="button" tabindex="-1" aria-label="Documents"></button>
+          <button class="dot" type="button" tabindex="-1" aria-label="Renewals"></button>
+          <button class="dot" type="button" tabindex="-1" aria-label="Bond repository"></button>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -122,7 +125,7 @@
 
 <style>
   .hero {
-    padding-top: 9rem;
+    padding-top: 10.5rem;
     padding-bottom: var(--sp-24);
     display: flex;
     align-items: center;
@@ -148,24 +151,50 @@
     z-index: 1;
   }
 
-  @media (min-width: 900px) {
+  @media (min-width: 960px) {
     .hero-grid {
-      grid-template-columns: 54% 1fr;
-      gap: var(--sp-16);
+      grid-template-columns: 48% 1fr;
+      gap: var(--sp-12);
     }
   }
 
   /* ── Copy ── */
   .hero-heading {
-    color: white;
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 5vw, 3.875rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: #fff;
     margin-bottom: var(--sp-6);
+    text-wrap: balance;
+  }
+
+  .rotator { display: inline; }
+  .rotator-text { color: var(--mint); }
+  .rotator-caret {
+    display: inline-block;
+    width: 3px;
+    height: 0.82em;
+    margin-left: 5px;
+    background: var(--mint);
+    vertical-align: -0.04em;
+    animation: caret 1s steps(1) infinite;
+  }
+  @keyframes caret { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
   }
 
   .hero-sub {
     font-size: var(--text-lg);
     line-height: 1.65;
     color: rgba(255, 255, 255, 0.8);
-    max-width: 52ch;
+    max-width: 50ch;
     margin-bottom: var(--sp-8);
     text-wrap: pretty;
   }
@@ -183,365 +212,356 @@
     font-weight: 500;
   }
 
-  /* ── Illustration ── */
-  /* Mobile: the before/after contrast is carried by the WowMoment section,
-     so the hero shows only the payoff — the generated-documents window. */
+  /* ── Device ── */
   .hero-visual {
-    display: block;
-    margin-top: var(--sp-10);
-  }
-
-  .hero-visual .before-panel,
-  .hero-visual .transform-arrow {
-    display: none;
-  }
-
-  @media (min-width: 900px) {
-    .hero-visual {
-      display: flex;
-      align-items: center;
-      gap: var(--sp-4);
-      margin-top: 0;
-    }
-
-    .hero-visual .before-panel {
-      display: block;
-    }
-
-    .hero-visual .transform-arrow {
-      display: flex;
-    }
-
-    .after-panel {
-      max-width: none;
-      margin: 0;
-    }
-  }
-
-  /* ── Before panel ── */
-  .before-panel {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .panel-header {
+    margin-top: var(--sp-8);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: var(--sp-3);
+    justify-content: center;
+  }
+  @media (min-width: 960px) { .hero-visual { margin-top: 0; } }
+
+  .device {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
   }
 
-  .panel-label {
-    font-size: 10px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    font-family: var(--font-body);
+  .laptop { position: relative; }
+
+  .laptop-screen {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: #fff;
+    border: 9px solid #14233a;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.4),
+      0 30px 70px rgba(0, 0, 0, 0.45),
+      0 8px 20px rgba(0, 0, 0, 0.25);
   }
 
-  .time-badge {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.35);
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2px 7px;
-    border-radius: 100px;
+  .laptop-foot {
+    height: 14px;
+    width: 118%;
+    margin: 0 -9%;
+    background: linear-gradient(180deg, #c3ccd8, #8a98ab);
+    border-radius: 0 0 14px 14px;
+    box-shadow: 0 10px 18px rgba(0,0,0,0.3);
+    position: relative;
+  }
+  .laptop-foot::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 16%; height: 5px;
+    background: #76859a;
+    border-radius: 0 0 6px 6px;
   }
 
-  .file-list {
-    list-style: none;
+  /* Slides */
+  .screens { position: absolute; inset: 0; }
+  .screen {
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--sp-2);
-    margin-bottom: var(--sp-3);
+    background: #fff;
+    opacity: 0;
+    transform: scale(1.015);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
   }
+  .screen.is-active { opacity: 1; transform: scale(1); }
 
-  .file-row {
+  .scr-head {
     display: flex;
     align-items: center;
     gap: var(--sp-2);
-    padding: var(--sp-2) var(--sp-3);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-  }
-
-  .file-ext {
+    padding: 9px 12px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
     flex-shrink: 0;
-    font-family: var(--font-mono);
-    font-size: 0.625rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    padding: 2px 5px;
-    border-radius: 3px;
-    line-height: 1.4;
   }
-
-  .file-ext.docx  { background: rgba(21, 101, 192, 0.25); color: #90caf9; }
-  .file-ext.xlsx  { background: rgba(27, 94, 32, 0.25);  color: #a5d6a7; }
-  .file-ext.email { background: rgba(74, 20, 140, 0.25); color: #ce93d8; }
-
-  .file-name {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.5);
+  .scr-app {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--navy);
+  }
+  .scr-tab {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: #94a3b8;
+    flex: 1;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .scr-pill {
     font-family: var(--font-mono);
-  }
-
-  .before-note {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.35);
-    font-family: var(--font-body);
-    padding-top: var(--sp-3);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    line-height: 1.5;
-    text-wrap: pretty;
-  }
-
-  /* ── Arrow connector ── */
-  .transform-arrow {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* ── After panel: macOS app window ── */
-  .after-panel {
-    flex: 1.35;
-    min-width: 0;
-    max-width: 440px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.06),
-      0 20px 56px rgba(0, 0, 0, 0.32),
-      0 6px 16px rgba(0, 0, 0, 0.12);
-    color: var(--ink);
-  }
-
-  /* Window chrome */
-  .app-chrome {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-    padding: 11px 16px;
-    background: #f1f5f9;
-    border-bottom: 1px solid #e2e8f0;
-  }
-
-  .app-dots {
-    display: flex;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-
-  .app-dots span {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    display: block;
-  }
-
-  .app-dots span:nth-child(1) { background: #ff5f57; }
-  .app-dots span:nth-child(2) { background: #febc2e; }
-  .app-dots span:nth-child(3) { background: #28c840; }
-
-  .app-name {
-    font-family: var(--font-display);
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--navy);
-    flex: 1;
-    padding-left: var(--sp-2);
-    letter-spacing: -0.01em;
-  }
-
-  .app-badge {
-    font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 600;
-    color: #16a34a;
-    background: #dcfce7;
-    padding: 3px 9px;
+    padding: 2px 7px;
     border-radius: 100px;
+    color: #64748b;
+    background: #eef2f6;
     white-space: nowrap;
   }
+  .scr-pill--mint { color: #0f766e; background: #ccfbf1; }
+  .scr-pill--teal { color: #0e7c86; background: #d7f0f1; }
 
-  /* Record header */
-  .app-record {
-    padding: var(--sp-5) var(--sp-6) var(--sp-4);
-    border-bottom: 1px solid #f1f5f9;
-  }
-
-  .record-title {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--navy);
-    letter-spacing: -0.01em;
-    margin-bottom: 3px;
-  }
-
-  .record-meta {
-    font-family: var(--font-mono);
-    font-size: 11px;
+  .scr-body { padding: 12px 14px; overflow: hidden; }
+  .scr-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
     color: #94a3b8;
+    margin-bottom: 9px;
   }
 
-  /* Document list */
-  .doc-list {
-    list-style: none;
+  /* docs */
+  .scr-docs { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .scr-docs li {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: #374151;
+    background: #f8fafc; border: 1px solid #eef2f6; border-radius: 6px;
+    padding: 7px 10px;
+  }
+  .scr-check {
+    width: 14px; height: 14px; border-radius: 50%; background: var(--teal); flex-shrink: 0;
+    position: relative;
+  }
+  .scr-check::after {
+    content: ''; position: absolute; left: 4px; top: 3.5px;
+    width: 3px; height: 6px; border: solid #fff; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg);
+  }
+  .scr-ext {
+    margin-left: auto; font-family: var(--font-mono); font-size: 8px; font-weight: 700;
+    color: #94a3b8; background: #eef2f6; padding: 2px 5px; border-radius: 3px;
+  }
+
+  /* renewal rows */
+  .scr-rows { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .scr-rows li {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    border: 1px solid #eef2f6; border-radius: 6px; padding: 8px 10px;
+  }
+  .rw-main { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+  .rw-name { font-size: 12px; font-weight: 600; color: var(--navy); }
+  .rw-sub { font-family: var(--font-mono); font-size: 9px; color: #94a3b8; }
+  .rw-badge {
+    flex-shrink: 0; font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    padding: 2px 7px; border-radius: 100px; color: #64748b; background: #eef2f6;
+  }
+  .rw-soon { color: #b45309; background: #fef3c7; }
+  .rw-urgent { color: #b91c1c; background: #fee2e2; }
+
+  /* table */
+  .scr-table { width: 100%; border-collapse: collapse; }
+  .scr-table th {
+    text-align: left; font-family: var(--font-mono); font-size: 8px; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase; color: #94a3b8;
+    padding: 4px 6px; border-bottom: 1px solid #e2e8f0;
+  }
+  .scr-table td {
+    font-size: 11px; color: #374151; padding: 7px 6px; border-bottom: 1px solid #f1f5f9;
+  }
+  .scr-table td:first-child { font-weight: 600; color: var(--navy); }
+  .st { font-family: var(--font-mono); font-size: 9px; font-weight: 600; padding: 2px 6px; border-radius: 100px; }
+  .st-ok { color: #0f766e; background: #ccfbf1; }
+  .st-due { color: #b45309; background: #fef3c7; }
+
+  /* Floating stat card */
+  .float-card {
+    position: absolute;
+    left: -24px;
+    bottom: 12%;
     display: flex;
     flex-direction: column;
-    padding: var(--sp-4) var(--sp-6);
-    gap: var(--sp-3);
+    gap: 2px;
+    padding: 12px 16px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.28), 0 0 0 1px rgba(0,0,0,0.04);
+  }
+  .fc-figure {
+    font-family: var(--font-mono);
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .fc-unit { font-size: 0.875rem; color: var(--teal); margin-left: 2px; }
+  .fc-label { font-size: 11px; color: var(--ink-tertiary); font-weight: 500; }
+
+  @media (max-width: 520px) {
+    .float-card { left: -8px; bottom: 10%; padding: 9px 12px; }
+    .fc-figure { font-size: 1.375rem; }
   }
 
-  .doc-row {
+  /* Slideshow dots */
+  .device-dots {
     display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-    font-size: 0.875rem;
-    color: #374151;
-    font-weight: 500;
-    font-family: var(--font-body);
-  }
-
-  .doc-check {
-    width: 18px;
-    height: 18px;
-    display: inline-flex;
-    align-items: center;
     justify-content: center;
-    background: var(--teal);
-    border-radius: 50%;
-    flex-shrink: 0;
+    gap: 8px;
+    margin-top: var(--sp-6);
   }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    border: none; padding: 0;
+    background: rgba(255, 255, 255, 0.25);
+    transition: background 0.3s ease, width 0.3s ease;
+  }
+  .dot.is-active { background: var(--mint); width: 22px; border-radius: 100px; }
 
-  /* Load animations */
-  .hero-heading {
-    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-  }
-  .hero-sub {
-    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
-  }
-  .hero-actions {
-    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
-  }
+  /* ── Entrance ── */
+  .hero-heading { animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+  .hero-sub     { animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
+  .hero-actions { animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.4s both; }
+  .device       { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
+    from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-heading,
-    .hero-sub,
-    .hero-actions { animation: none; }
+    .hero-heading, .hero-sub, .hero-actions, .device { animation: none; }
+    .rotator-caret { animation: none; }
+    .screen { transition: none; }
   }
 </style>
 
 <script>
-(function () {
-  const canvas = document.querySelector<HTMLCanvasElement>('.hero-canvas');
-  if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  /* ── Rotating headline ── */
+  (function () {
+    const node = document.querySelector<HTMLElement>('[data-rotator]');
+    if (!node) return;
+    const el: HTMLElement = node;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let phrases: string[] = [];
+    try { phrases = JSON.parse(el.dataset.phrases || '[]'); } catch {}
+    if (reduce || phrases.length < 2) return;
 
-  const ctx = canvas.getContext('2d')!;
-  let W = 0, H = 0;
+    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    let alive = true;
 
-  function resize() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize, { passive: true });
-
-  // Particle config
-  const COUNT      = 65;
-  const MAX_DIST   = 140;
-  const DOT_COLOR  = 'rgba(255,255,255,';
-  const LINE_COLOR = 'rgba(14,124,134,';
-
-  interface P { x: number; y: number; vx: number; vy: number; r: number; o: number }
-
-  const pts: P[] = Array.from({ length: COUNT }, () => ({
-    x:  Math.random() * W,
-    y:  Math.random() * H,
-    vx: (Math.random() - 0.5) * 0.38,
-    vy: (Math.random() - 0.5) * 0.38,
-    r:  Math.random() * 1.2 + 0.4,
-    o:  Math.random() * 0.18 + 0.07,
-  }));
-
-  let raf = 0;
-  let running = false;
-
-  function frame() {
-    ctx.clearRect(0, 0, W, H);
-
-    // Connections first (drawn under dots)
-    for (let i = 0; i < COUNT; i++) {
-      for (let j = i + 1; j < COUNT; j++) {
-        const dx = pts[i].x - pts[j].x;
-        const dy = pts[i].y - pts[j].y;
-        const d  = Math.sqrt(dx * dx + dy * dy);
-        if (d < MAX_DIST) {
-          ctx.beginPath();
-          ctx.moveTo(pts[i].x, pts[i].y);
-          ctx.lineTo(pts[j].x, pts[j].y);
-          ctx.strokeStyle = LINE_COLOR + ((1 - d / MAX_DIST) * 0.2) + ')';
-          ctx.lineWidth = 0.65;
-          ctx.stroke();
+    async function loop() {
+      let i = 0;
+      // start from the first phrase already rendered
+      await sleep(1800);
+      while (alive) {
+        const current = el.textContent || '';
+        // delete
+        for (let c = current.length; c >= 0; c--) {
+          if (!alive) return;
+          el.textContent = current.slice(0, c);
+          await sleep(28);
         }
+        i = (i + 1) % phrases.length;
+        const next = phrases[i];
+        // type
+        for (let c = 0; c <= next.length; c++) {
+          if (!alive) return;
+          el.textContent = next.slice(0, c);
+          await sleep(42);
+        }
+        await sleep(2200);
       }
     }
+    loop();
+    document.addEventListener('visibilitychange', () => { if (document.hidden) alive = false; });
+  })();
 
-    // Dots
-    for (const p of pts) {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0 || p.x > W) p.vx *= -1;
-      if (p.y < 0 || p.y > H) p.vy *= -1;
+  /* ── Device slideshow ── */
+  (function () {
+    const wrap = document.querySelector<HTMLElement>('[data-slides]');
+    const dotsWrap = document.querySelector<HTMLElement>('[data-dots]');
+    if (!wrap || !dotsWrap) return;
+    const slides = Array.from(wrap.querySelectorAll<HTMLElement>('[data-slide]'));
+    const dots = Array.from(dotsWrap.querySelectorAll<HTMLElement>('.dot'));
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || slides.length < 2) return;
 
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = DOT_COLOR + p.o + ')';
-      ctx.fill();
+    let idx = 0;
+    let timer = 0;
+    const DELAY = 3600;
+
+    function show(n: number) {
+      slides[idx].classList.remove('is-active');
+      dots[idx]?.classList.remove('is-active');
+      idx = n % slides.length;
+      slides[idx].classList.add('is-active');
+      dots[idx]?.classList.add('is-active');
     }
+    function next() { show(idx + 1); }
+    function start() { stop(); timer = window.setInterval(next, DELAY); }
+    function stop() { if (timer) window.clearInterval(timer); timer = 0; }
 
-    raf = requestAnimationFrame(frame);
-  }
+    const device = wrap.closest('.device');
+    device?.addEventListener('mouseenter', stop);
+    device?.addEventListener('mouseleave', start);
 
-  function start() {
-    if (running) return;
-    running = true;
-    frame();
-  }
-  function stop() {
-    running = false;
-    cancelAnimationFrame(raf);
-  }
+    const io = new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop()), { threshold: 0.2 });
+    io.observe(wrap);
+    document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+  })();
 
-  // Only animate while the hero is on-screen and the tab is visible —
-  // the O(n²) connection loop has no business running once it's scrolled away.
-  const onScreen = new IntersectionObserver(
-    ([entry]) => (entry.isIntersecting ? start() : stop()),
-    { threshold: 0 }
-  );
-  onScreen.observe(canvas);
+  /* ── Ambient particle field ── */
+  (function () {
+    const canvasEl = document.querySelector<HTMLCanvasElement>('.hero-canvas');
+    if (!canvasEl || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const context = canvasEl.getContext('2d');
+    if (!context) return;
+    const canvas: HTMLCanvasElement = canvasEl;
+    const ctx: CanvasRenderingContext2D = context;
 
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stop();
-    else if (canvas.getBoundingClientRect().bottom > 0) start();
-  });
-})();
+    let W = 0, H = 0;
+    function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    const COUNT = 60, MAX_DIST = 140;
+    const pts = Array.from({ length: COUNT }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.38, vy: (Math.random() - 0.5) * 0.38,
+      r: Math.random() * 1.2 + 0.4, o: Math.random() * 0.18 + 0.07,
+    }));
+
+    let raf = 0, running = false;
+    function frame() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < COUNT; i++) {
+        for (let j = i + 1; j < COUNT; j++) {
+          const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < MAX_DIST) {
+            ctx.beginPath();
+            ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y);
+            ctx.strokeStyle = 'rgba(14,124,134,' + ((1 - d / MAX_DIST) * 0.2) + ')';
+            ctx.lineWidth = 0.65; ctx.stroke();
+          }
+        }
+      }
+      for (const p of pts) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,' + p.o + ')'; ctx.fill();
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    function start() { if (running) return; running = true; frame(); }
+    function stop() { running = false; cancelAnimationFrame(raf); }
+
+    new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop()), { threshold: 0 }).observe(canvas);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else if (canvas.getBoundingClientRect().bottom > 0) start();
+    });
+  })();
 </script>

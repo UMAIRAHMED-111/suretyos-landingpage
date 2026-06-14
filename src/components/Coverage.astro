@@ -1,0 +1,135 @@
+---
+const categories = [
+  {
+    name: 'Court & probate',
+    items: ['Guardianship', 'Conservatorship', 'Administrator', 'Executor', 'VA fiduciary', 'Appeal'],
+  },
+  {
+    name: 'License & permit',
+    items: ['Contractor', 'Auto dealer', 'Mortgage broker', 'Freight broker', 'Sales tax'],
+  },
+  {
+    name: 'Contract',
+    items: ['Bid', 'Performance', 'Payment', 'Maintenance', 'Supply'],
+  },
+  {
+    name: 'Fidelity & public official',
+    items: ['Notary', 'Public official', 'Janitorial', 'ERISA', 'Business service'],
+  },
+];
+---
+
+<section class="section section--filing coverage" aria-labelledby="coverage-heading">
+  <div class="container">
+    <div class="coverage-header" data-reveal>
+      <h2 id="coverage-heading" class="u-headline">Built for the bonds you actually write.</h2>
+      <p class="coverage-sub">
+        Not a generic insurance template. SuretyOS knows the document set, the county
+        cover sheets, and the carrier requirements for the bonds surety agencies handle every day.
+      </p>
+    </div>
+
+    <ul class="coverage-grid" role="list">
+      {categories.map((c, i) => (
+        <li class="cov-card" data-reveal data-delay={String((i % 4) + 1)}>
+          <h3 class="cov-name">{c.name}</h3>
+          <ul class="cov-items" role="list">
+            {c.items.map((item) => (
+              <li class="cov-item">
+                <span class="cov-dot" aria-hidden="true"></span>{item}
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+
+    <p class="coverage-note" data-reveal>
+      County-specific court forms for Florida today, with new states added as founding agencies onboard.
+    </p>
+  </div>
+</section>
+
+<style>
+  .coverage-header {
+    max-width: 52ch;
+    margin-bottom: var(--sp-12);
+  }
+  .coverage-header h2 { color: var(--navy); }
+  .coverage-sub {
+    margin-top: var(--sp-4);
+    font-size: var(--text-lg);
+    line-height: 1.6;
+    color: var(--ink-secondary);
+    text-wrap: pretty;
+  }
+
+  .coverage-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-5);
+  }
+  @media (min-width: 560px) {
+    .coverage-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 920px) {
+    .coverage-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .cov-card {
+    background: #fff;
+    border: 1px solid rgba(26, 58, 92, 0.08);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  }
+  .cov-card:hover {
+    box-shadow: var(--shadow-card);
+    transform: translateY(-3px);
+    border-color: rgba(14, 124, 134, 0.25);
+  }
+
+  .cov-name {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+    padding-bottom: var(--sp-3);
+    margin-bottom: var(--sp-4);
+    border-bottom: 1px solid var(--filing);
+  }
+
+  .cov-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+
+  .cov-item {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-size: var(--text-sm);
+    color: var(--ink-secondary);
+  }
+
+  .cov-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .coverage-note {
+    margin-top: var(--sp-10);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--ink-tertiary);
+    text-align: center;
+    text-wrap: pretty;
+  }
+</style>

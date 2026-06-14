@@ -1,0 +1,267 @@
+---
+// Starter articles live under /blog. Edit the .astro files there to revise copy.
+const posts = [
+  {
+    category: 'Renewals',
+    title: 'Why bond renewals slip through the cracks',
+    dek: 'The spreadsheet tab that quietly costs agencies clients and E&O claims, and the alert cadence that prevents it.',
+    read: '5 min read',
+    href: '/blog/why-bond-renewals-slip',
+    image: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=800&q=70',
+    alt: 'A wall calendar marking dates, the way renewal deadlines get tracked by hand.',
+  },
+  {
+    category: 'Workflow',
+    title: 'The four-document bond stack, explained',
+    dek: 'Bond form, power of attorney, indemnity agreement, court cover sheet: what each is, and why it keeps getting retyped.',
+    read: '6 min read',
+    href: '/blog/four-document-bond-stack',
+    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=70',
+    alt: 'A hand signing a printed document at a desk.',
+  },
+  {
+    category: 'Compliance',
+    title: 'County cover sheets: the small print that delays issuance',
+    dek: 'How county-specific court forms trip up an otherwise-complete bond packet, and how to get them right the first time.',
+    read: '4 min read',
+    href: '/blog/county-cover-sheets',
+    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=70',
+    alt: 'A statue of Lady Justice holding scales, representing court filings.',
+  },
+];
+
+const news = [
+  {
+    date: 'Jun 10, 2026',
+    title: 'SuretyOS opens its founding-agency program',
+    dek: 'Limited to the first 25 agencies, with lifetime founder pricing.',
+  },
+  {
+    date: 'May 28, 2026',
+    title: 'Florida court bond packets now generating end to end',
+    dek: 'Probate, guardianship, and VA fiduciary, with county cover sheets included.',
+  },
+];
+---
+
+<section class="section section--white insights" aria-labelledby="insights-heading">
+  <div class="container">
+    <div class="insights-header" data-reveal>
+      <h2 id="insights-heading" class="u-headline">Insights &amp; updates.</h2>
+      <p class="insights-sub">Notes on the surety workflow, and what we're shipping.</p>
+    </div>
+
+    <ul class="post-grid" role="list">
+      {posts.map((p, i) => (
+        <li data-reveal data-delay={String(i + 1)}>
+          <a class="post-card" href={p.href}>
+            <div class="post-thumb">
+              <img src={p.image} alt={p.alt} loading="lazy" />
+            </div>
+            <div class="post-content">
+              <span class="post-cat">{p.category}</span>
+              <h3 class="post-title">{p.title}</h3>
+              <p class="post-dek">{p.dek}</p>
+              <div class="post-foot">
+                <span class="post-read">{p.read}</span>
+                <span class="post-more">Read more <span aria-hidden="true">&rarr;</span></span>
+              </div>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="news" data-reveal>
+      <h3 class="news-title">Latest updates</h3>
+      <ul class="news-list" role="list">
+        {news.map((n) => (
+          <li class="news-item">
+            <time class="news-date">{n.date}</time>
+            <div class="news-body">
+              <p class="news-headline">{n.title}</p>
+              <p class="news-dek">{n.dek}</p>
+            </div>
+            <span class="news-more" aria-hidden="true">&rarr;</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .insights-header { margin-bottom: var(--sp-12); }
+  .insights-header h2 { color: var(--navy); }
+  .insights-sub {
+    margin-top: var(--sp-3);
+    font-size: var(--text-lg);
+    color: var(--ink-secondary);
+  }
+
+  /* ── Blog cards ── */
+  .post-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+  }
+  @media (min-width: 720px) {
+    .post-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .post-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid rgba(26, 58, 92, 0.1);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+  .post-card:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+  }
+
+  .post-thumb {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--filing);
+  }
+  .post-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .post-card:hover .post-thumb img { transform: scale(1.04); }
+
+  .post-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--sp-6);
+  }
+  .post-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-4px);
+    border-color: rgba(14, 124, 134, 0.3);
+  }
+
+  .post-cat {
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: rgba(14, 124, 134, 0.09);
+    padding: 3px 9px;
+    border-radius: 100px;
+    margin-bottom: var(--sp-4);
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-size: 1.1875rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--navy);
+    margin-bottom: var(--sp-3);
+    text-wrap: balance;
+  }
+
+  .post-dek {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--ink-secondary);
+    margin-bottom: var(--sp-5);
+    text-wrap: pretty;
+  }
+
+  .post-foot {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--filing);
+  }
+
+  .post-read {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--ink-tertiary);
+  }
+
+  .post-more {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--teal);
+  }
+  .post-card:hover .post-more { color: var(--teal-hover); }
+
+  /* ── News list ── */
+  .news {
+    margin-top: var(--sp-16);
+    padding-top: var(--sp-10);
+    border-top: 2px solid var(--filing);
+  }
+
+  .news-title {
+    font-family: var(--font-display);
+    font-size: var(--text-title);
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: var(--sp-6);
+  }
+
+  .news-list { list-style: none; display: flex; flex-direction: column; }
+
+  .news-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-1);
+    padding: var(--sp-5) 0;
+    border-bottom: 1px solid var(--filing);
+    align-items: start;
+  }
+  @media (min-width: 680px) {
+    .news-item {
+      grid-template-columns: 130px 1fr auto;
+      gap: var(--sp-6);
+      align-items: center;
+    }
+  }
+
+  .news-date {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--ink-tertiary);
+  }
+
+  .news-headline {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: var(--text-base);
+  }
+
+  .news-dek {
+    font-size: var(--text-sm);
+    color: var(--ink-secondary);
+    margin-top: 2px;
+  }
+
+  .news-more {
+    color: var(--teal);
+    font-size: 1.125rem;
+    display: none;
+  }
+  @media (min-width: 680px) { .news-more { display: block; } }
+</style>

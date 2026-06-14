@@ -1,0 +1,186 @@
+---
+// Honest "connects with your stack" logo wall. These are the systems SuretyOS is
+// built to integrate with — not customers.
+//
+// To use real brand logos later: drop a monochrome SVG into /public/logos (e.g.
+// /public/logos/hubspot.svg) and set `logo: '/logos/hubspot.svg'` on that item.
+// When `logo` is present it renders as an <img>; otherwise a styled logotype is
+// used. Everything is desaturated to one ink so a mixed set still looks cohesive.
+type Integration = { name: string; logo?: string };
+const groups: { label: string; items: Integration[] }[] = [
+  {
+    label: 'Carriers & sureties',
+    items: [
+      { name: 'Liberty Mutual' },
+      { name: 'Travelers' },
+      { name: 'CNA Surety' },
+      { name: 'Merchants Bonding' },
+      { name: 'The Hartford' },
+    ],
+  },
+  {
+    label: 'Agency management',
+    items: [
+      { name: 'AMS360' },
+      { name: 'Applied Epic' },
+      { name: 'EZLynx' },
+      { name: 'Vertafore' },
+    ],
+  },
+  {
+    label: 'CRM & tools',
+    items: [
+      { name: 'Salesforce' },
+      { name: 'HubSpot' },
+      { name: 'QuickBooks' },
+      { name: 'DocuSign' },
+    ],
+  },
+];
+
+const all = groups.flatMap((g) => g.items);
+---
+
+<section class="integrations" aria-labelledby="integrations-heading">
+  <div class="container">
+    <p id="integrations-heading" class="integrations-title" data-reveal>
+      Built to connect with the tools your agency already runs on.
+    </p>
+
+    <div class="logo-wall" aria-hidden="true">
+      <div class="logo-track">
+        {[...all, ...all].map((item) => (
+          <span class="logo-slot">
+            {item.logo
+              ? <img class="logo-img" src={item.logo} alt={item.name} loading="lazy" />
+              : <span class="logo-type">{item.name}</span>}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Accessible, grouped list (also the layout shown when motion is reduced) -->
+    <ul class="integrations-groups" data-reveal data-delay="1">
+      {groups.map((g) => (
+        <li class="int-group">
+          <span class="int-group-label">{g.label}</span>
+          <span class="int-group-items">{g.items.map((i) => i.name).join(' · ')}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .integrations {
+    background: var(--white);
+    border-bottom: 1px solid var(--filing);
+    padding: var(--sp-16) 0;
+    overflow: hidden;
+  }
+
+  .integrations-title {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+    max-width: 34ch;
+    margin: 0 auto var(--sp-10);
+    text-wrap: balance;
+  }
+
+  /* ── Logo wall (marquee) ── */
+  .logo-wall {
+    position: relative;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  }
+
+  .logo-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    gap: var(--sp-16);
+    animation: marquee 44s linear infinite;
+  }
+
+  .logo-wall:hover .logo-track { animation-play-state: paused; }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .logo-slot {
+    flex-shrink: 0;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Real-logo path */
+  .logo-img {
+    height: 26px;
+    width: auto;
+    filter: grayscale(1);
+    opacity: 0.5;
+    transition: opacity 0.2s ease, filter 0.2s ease;
+  }
+  .logo-slot:hover .logo-img { opacity: 1; filter: grayscale(0); }
+
+  /* Logotype fallback — uniform monochrome wordmarks */
+  .logo-type {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--navy);
+    opacity: 0.42;
+    transition: opacity 0.2s ease, color 0.2s ease;
+  }
+  .logo-slot:hover .logo-type { opacity: 1; color: var(--teal); }
+
+  /* ── Grouped fallback (reduced motion) ── */
+  .integrations-groups {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--sp-4) var(--sp-10);
+    margin-top: var(--sp-8);
+  }
+
+  .int-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-align: center;
+  }
+
+  .int-group-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  .int-group-items {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--ink-tertiary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-wall { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .integrations-groups { display: none; }
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+// Ambient looping video background for a section. Heavy navy scrim keeps the
+// brand identity and text contrast intact — the video reads as subtle motion,
+// not a literal scene. Lazy-loaded when near the viewport; disabled on mobile
+// and for prefers-reduced-motion (the section's own navy bg shows instead).
+interface Props {
+  src: string;
+}
+const { src } = Astro.props;
+---
+
+<div class="video-bg" aria-hidden="true">
+  <video class="video-bg-el" muted loop playsinline preload="none" data-vsrc={src}></video>
+  <span class="video-bg-scrim"></span>
+</div>
+
+<style>
+  .video-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .video-bg-el {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* "Greyed out": desaturated footage */
+    filter: grayscale(100%) contrast(1.04);
+    opacity: 0;
+    transition: opacity 1.1s ease;
+  }
+  .video-bg-el.is-ready { opacity: 0.6; }
+
+  /* Grey scrim mutes the footage and keeps white text legible */
+  .video-bg-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(120% 120% at 50% 30%, rgba(18, 24, 33, 0.55), rgba(15, 20, 28, 0.78) 75%),
+      linear-gradient(180deg, rgba(17, 23, 32, 0.7), rgba(14, 19, 27, 0.8));
+  }
+
+  /* Perf: no video on small screens; brand navy bg shows through */
+  @media (max-width: 760px) {
+    .video-bg-el { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .video-bg-el { display: none; }
+  }
+</style>
+
+<script>
+  // Lazy-load each video when its section nears the viewport; pause off-screen.
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const small = window.matchMedia('(max-width: 760px)').matches;
+
+  if (!reduce && !small) {
+    const vids = document.querySelectorAll<HTMLVideoElement>('.video-bg-el[data-vsrc]');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const v = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) {
+          if (!v.src) {
+            v.src = v.dataset.vsrc || '';
+            v.addEventListener('loadeddata', () => v.classList.add('is-ready'), { once: true });
+          }
+          v.play().catch(() => {});
+        } else {
+          v.pause();
+        }
+      });
+    }, { rootMargin: '200px 0px' });
+
+    vids.forEach((v) => io.observe(v));
+  }
+</script>
