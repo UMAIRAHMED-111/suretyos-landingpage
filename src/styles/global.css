@@ -40,7 +40,7 @@
   --sp-32: 8rem;      /* 128px */
 
   /* Typography */
-  --font-display: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-display: "Schibsted Grotesk", system-ui, -apple-system, sans-serif;
   --font-body:    "Inter", system-ui, -apple-system, sans-serif;
   --font-mono:    "JetBrains Mono", "Fira Code", monospace;
   --font: var(--font-body);
@@ -146,6 +146,23 @@ button { font-family: inherit; }
 .u-mono {
   font-family: var(--font-mono);
   font-feature-settings: "tnum" 1;
+}
+
+/* Accent underline to make a key word in a heading prominent */
+.hl {
+  position: relative;
+  white-space: nowrap;
+}
+.hl::after {
+  content: "";
+  position: absolute;
+  left: -0.02em;
+  right: -0.02em;
+  bottom: -0.06em;
+  height: 0.11em;
+  background: var(--mint);
+  border-radius: 100px;
+  pointer-events: none;
 }
 
 .u-body {
